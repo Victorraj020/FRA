@@ -1,0 +1,68 @@
+
+              <table align="center" width="70%" border="1" bordercolor="#EBEBEB" style="border-collapse:collapse " cellspacing="0" >
+                <tr bgcolor="#d2ffd2">
+                <td align="center" rowspan="1"><b>S No.</b></td>
+                 
+               <td align="center" rowspan="1"><b> Registration No.</b></td>
+              <td align="center" rowspan="1" ><b>Head of Household</b></td>
+               <td align="center" rowspan="1"><b>Caste</b></td>
+              <td align="center" rowspan="1" ><b>Family_ID</b></td>
+               <td align="center" rowspan="1" ><b>Extent of land(in acres)</b></td>
+                
+            
+               </tr>
+                
+                </td>
+                </tr>
+                
+                
+                <tr>
+                 <td align="center">1</td>
+                 
+                 <td align="left">OR-21-002-004-003/2861</td>
+                 <td align="left">Banka Taisum</td>
+                 <td align="left">ST</td>
+                 <td align="right">2861</td>
+                   <td align="right">1.28</td>
+                
+                   
+                </tr>
+                
+                <tr>
+                 <td align="center">2</td>
+                 
+                 <td align="left">OR-21-002-004-003/2866</td>
+                 <td align="left">Jina Taisam</td>
+                 <td align="left">ST</td>
+                 <td align="right">2866</td>
+                   <td align="right">0.91</td>
+                
+                   
+                </tr>
+                
+                <tr>
+                 <td align="center">3</td>
+                 
+                 <td align="left">OR-21-002-004-003/2872</td>
+                 <td align="left">Bikram Gagarai</td>
+                 <td align="left">ST</td>
+                 <td align="right">2872</td>
+                   <td align="right">0.3</td>
+                
+                   
+                </tr>
+                
+                <tr>
+                 <td align="center">4</td>
+                 
+                 <td align="left">OR-21-002-004-003/2878</td>
+                 <td align="left">Lalsingh Hisa</td>
+                 <td align="left">ST</td>
+                 <td align="right">2878</td>
+                   <td align="right">2.52</td>
+                
+                   
+                </tr>
+                
+            </table>
+            

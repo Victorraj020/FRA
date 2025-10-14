@@ -1,0 +1,166 @@
+{
+  "app": {
+    "title": "FRA Portal",
+    "subtitle": "Forest Rights Administration",
+    "loading": "Loading..."
+  },
+  "filters": {
+    "controlPanel": "Control Panel",
+    "tab": "Filters",
+    "statsTab": "Stats",
+    "schemesTab": "Schemes",
+    "docsTab": "Docs",
+    "title": "Search & Filter",
+    "search": "Search villages...",
+    "state": "State",
+    "selectState": "Select State",
+    "district": "District",
+    "selectDistrict": "Select District",
+    "status": "Status",
+    "allStates": "All States",
+    "allDistricts": "All Districts",
+    "allStatus": "All Status",
+    "clear": "Clear Filters",
+    "showForests": "Show Forest Areas",
+    "mapMode": "Map Mode",
+    "modeBoth": "Both (FRA + Forests)",
+    "modeFRA": "FRA Claims Only",
+    "modeForests": "Forests Only"
+  },
+  "status": {"approved": "Approved", "pending": "Pending", "rejected": "Rejected"},
+  "map": {
+    "legend": "Legend",
+    "viewDetails": "View Details",
+    "viewMore": "View More",
+    "loginRequiredTitle": "Login required",
+    "loginRequiredDesc": "Please sign in to view full village details.",
+    "forestAreas": "Forest Areas",
+    "biodiversity": {"high": "Large: High Biodiversity", "medium": "Medium: Medium Biodiversity", "low": "Small: Low Biodiversity"},
+    "stateBoundaries": "State Boundaries",
+    "districtBoundaries": "District Boundaries",
+    "waterLevel": "Water Level (m bgl)"
+  },
+  "limited": {
+    "badge": "Public Preview",
+    "title": "Limited Public View",
+    "description": "This public view shows a restricted subset of data and map features. Sign in with an approved role to access full analytics, editing and sensitive datasets.",
+    "selectRole": "Select Role",
+    "canSee": {"title": "What you can see", "basic": "Basic village markers with anonymized stats", "boundaries": "State and district boundaries", "totals": "High-level implementation totals"},
+    "restricted": {"title": "What is restricted", "details": "Detailed claim records and personally identifiable data", "tools": "Editing tools and administrative actions", "ai": "AI insights and document analysis"},
+    "needAccess": {"title": "Need full access?", "desc": "Sign in with a verified role to view complete datasets and tools."},
+    "createAccount": "Create Account"
+  },
+  "landing": {
+    "nav": {
+      "userLogin": "User Login",
+      "signUp": "Sign Up"
+    },
+    "hero": {
+      "badge": "Forest Rights Act Dashboard",
+      "headline1": "Empowering Forest Communities",
+      "headline2": "Through Digital Innovation",
+      "description": "A comprehensive platform for tracking, visualizing, and managing Forest Rights Act claims across India. Secure, interactive, and designed for government officials and community leaders."
+    },
+    "cta": {
+      "getStarted": "Get Started Free",
+      "title": "Ready to Transform Forest Rights Management?",
+      "subtitle": "Join government officials and community leaders who are already using FRA Portal to streamline forest rights administration across India.",
+      "startTrial": "Start Your Free Trial"
+    },
+    "stats": {
+      "states": "States Covered",
+      "villages": "Villages Tracked",
+      "users": "Active Users",
+      "data": "Data Points"
+    },
+    "features": {
+      "title": "Powerful Features for Forest Rights Management",
+      "subtitle": "Everything you need to efficiently manage and track forest rights claims across India",
+      "mapping": { "title": "Interactive Mapping", "desc": "Real-time visualization of forest rights claims across Indian states with detailed geographic data." },
+      "analytics": { "title": "Advanced Analytics", "desc": "Comprehensive data visualization with charts, trends, and statistical insights." },
+      "security": { "title": "Secure Authentication", "desc": "Firebase-powered security with protected routes and user session management." },
+      "users": { "title": "User Management", "desc": "Complete user registration, login, and profile management system." },
+      "states": { "title": "State Highlighting", "desc": "Special focus on key states: MP, Odisha, Telangana, and Tripura." },
+      "mobile": { "title": "Mobile Responsive", "desc": "Seamless experience across desktop, tablet, and mobile devices." }
+    },
+    "tech": {
+      "title": "Built with Modern Technology",
+      "subtitle": "Leveraging cutting-edge tools for optimal performance and security"
+    },
+    "security": {
+      "title": "Enterprise-Grade Security",
+      "subtitle": "Your data is protected with industry-leading security measures and compliance standards.",
+      "points": {
+        "auth": "Firebase Authentication & Authorization",
+        "encryption": "End-to-end data encryption",
+        "api": "Secure API endpoints",
+        "audits": "Regular security audits",
+        "gdpr": "GDPR compliant data handling",
+        "rbac": "Role-based access control"
+      },
+      "card": {
+        "title": "Secure by Design",
+        "desc": "Built with security-first principles to protect sensitive forest rights data and user information.",
+        "badge": "SOC 2 Compliant"
+      }
+    },
+    "footer": {
+      "tagline": "Empowering forest communities through digital innovation and comprehensive forest rights management solutions.",
+      "product": {"title": "Product", "features": "Features", "security": "Security", "pricing": "Pricing", "docs": "Documentation"},
+      "support": {"title": "Support", "help": "Help Center", "contact": "Contact Us", "status": "Status", "community": "Community"},
+      "rights": "All rights reserved. Built for Forest Rights Administration."
+    }
+  },
+  "tabs": {
+    "home": "Home",
+    "map": "Map",
+    "analytics": "Analytics",
+    "fraApplications": "FRA Applications",
+    "complaints": "Complaints",
+    "alerts": "Alerts",
+    "aiInsights": "AI Insights",
+    "myRole": "My Role"
+  },
+  "auth": {
+    "signIn": "Sign In",
+    "logout": "Logout",
+    "loggingOut": "Logging out...",
+    "govAdmin": "Government Administrator"
+  },
+  "lang": {
+    "label": "Language",
+    "english": "English",
+    "hindi": "Hindi",
+    "telugu": "Telugu",
+    "odia": "Odia",
+    "bengali": "Bengali"
+  },
+  "ai": {
+    "dashboardTitle": "AI Insights Dashboard",
+    "dashboardSubtitle": "Intelligent analysis and recommendations for forest rights management",
+    "refresh": "Refresh",
+    "export": "Export",
+    "totalInsights": "Total Insights",
+    "highImpact": "High Impact",
+    "newInsights": "New Insights",
+    "avgConfidence": "Avg Confidence",
+    "filterByCategory": "Filter by Category",
+    "limitedView": "Limited view",
+    "view": "View",
+    "close": "Close",
+    "markReviewed": "Mark as Reviewed",
+    "exportData": "Export Data",
+    "limitedDescription": "Detailed description hidden for your role. Contact administrator for full analytics access.",
+    "limitedDetail": "Limited detail view. Upgrade permissions to view full insight.",
+    "hidden": "Hidden",
+    "categories": {
+      "all": "All Categories",
+      "forest": "Forest",
+      "revenue": "Revenue",
+      "compliance": "Compliance",
+      "infrastructure": "Infrastructure"
+    }
+  }
+}
+
+

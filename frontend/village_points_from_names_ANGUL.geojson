@@ -1,0 +1,425 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Angul",
+        "source": "Nominatim"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          85.1021043,
+          20.8602508
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Athmallik",
+        "source": "Nominatim"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          84.5519125,
+          20.7330322
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Bajrakote",
+        "source": "Nominatim"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          85.0428388,
+          21.2145483
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Bantala",
+        "source": "Nominatim"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          85.0550806,
+          20.7031932
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Barnapal",
+        "source": "Nominatim"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          85.2156365,
+          20.8414363
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Biswanathpur",
+        "source": "Nominatim"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          85.2101473,
+          20.8499754
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Boinda",
+        "source": "Nominatim"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          84.7482064,
+          20.9200366
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Chhendipada",
+        "source": "Nominatim"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          84.8669404,
+          21.0631411
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Handapa",
+        "source": "Nominatim"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          84.6735697,
+          20.9772084
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Industrial",
+        "source": "Nominatim"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          85.0143305,
+          20.9225616
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Jarapada",
+        "source": "Nominatim"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          84.8681002,
+          20.9105755
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Kaniha",
+        "source": "Nominatim"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          84.995989,
+          21.1013571
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Katranga",
+        "source": "Nominatim"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          84.8465894,
+          20.573437
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Khannar",
+        "source": "Nominatim"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          85.1971977,
+          21.2657548
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Khemala",
+        "source": "Nominatim"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          85.1619105,
+          21.3853057
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Kiakata",
+        "source": "Nominatim"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          84.338311,
+          20.8757343
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Kishorenagar",
+        "source": "Nominatim"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          84.4659824,
+          20.9635886
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Mahidharpur",
+        "source": "Nominatim"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          85.1801715,
+          20.6948171
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "N.T.P.C.",
+        "source": "Nominatim"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          85.074766,
+          21.0882642
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "NALCO",
+        "source": "Nominatim"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          85.1585151,
+          20.8513526
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Pal Lahara",
+        "source": "Nominatim"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          85.1902347,
+          21.4339173
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Purunakot",
+        "source": "Nominatim"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          84.8345017,
+          20.6920127
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Rengali",
+        "source": "Nominatim"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          85.0200561,
+          21.2637295
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Samal Barrage",
+        "source": "Nominatim"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          85.1996226,
+          21.1303213
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Sipur",
+        "source": "Nominatim"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          85.1500129,
+          21.1657507
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Talcher",
+        "source": "Nominatim"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          85.2005822,
+          20.9322302
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Thakurgarh",
+        "source": "Nominatim"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          84.6751671,
+          20.7819554
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Tikaraparha",
+        "source": "Nominatim"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          84.7872569,
+          20.6004913
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Tippo",
+        "source": "Nominatim"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          85.1320476,
+          21.06638
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Tuluka",
+        "source": "Nominatim"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          84.9597224,
+          20.603819
+        ]
+      }
+    }
+  ]
+}

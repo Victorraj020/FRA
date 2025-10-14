@@ -1,0 +1,107 @@
+FRA Frontend — What’s Done
+
+Overview
+- Built with React 18 + Vite + TypeScript
+- UI framework: Tailwind CSS with shadcn/ui (Radix primitives)
+- State/data: React Query, React Hook Form, Zod validation
+- Routing: React Router v6 with role-based protection
+- Maps: Leaflet + React-Leaflet
+- Charts: Recharts
+- Icons: lucide-react
+- Animations: tailwindcss-animate + subtle motion (Framer Motion available)
+- Notifications: shadcn/ui Toast + Sonner
+- i18n: i18next + react-i18next (en, hi, te, or, bn)
+
+Information Architecture
+- Role-based landing: `RoleBasedRouter` drives which dashboard the user sees
+  - government → `GovernmentDashboard`
+  - ministry_tribal → `TribalDashboard`
+  - welfare_dept → `WelfareDashboard`
+  - forest_revenue → `ForestRevenueDashboard`
+  - planning_develop → `PlanningDevelopmentDashboard`
+  - ngo → `NGODashboard`
+  - normal/unauthenticated → `LocalDashboard` (limited)
+- Protected routes via `ProtectedRoute` enforcing `requiredRole`
+- Global providers: QueryClientProvider, AuthProvider, TooltipProvider, Toasters
+
+Design System, Look & Feel (UI/UX Theme)
+- Theming strategy: CSS variables (HSL) + Tailwind tokens defined in `src/index.css` and mapped in `tailwind.config.ts`
+  - Light: calm forest/earth palette (forest greens, muted earth oranges, neutral papers)
+  - Dark: high-contrast grayscale adaptation
+  - Key tokens: `--background`, `--foreground`, `--primary`, `--secondary`, `--accent`, `--dashboard-*`, `--status-*`
+- Dark mode: class-based (darkMode: "class"), fully themeable via CSS vars
+- Spacing & radius: consistent radii via `--radius` and container paddings
+- Shadows: layered depth tokens (`--shadow-card`, `--shadow-panel`, `--shadow-elevated`) for soft elevation
+- Typography: defaults via Tailwind + antialiased body; language-specific accenting via `applyLanguageAccent`
+- Layout chrome: fixed nav height `--nav-height` with subtle header gradient for depth without clutter
+- Status/priority utility classes: `.status-*` and `.priority-*` for consistent semantic color use
+- Buttons/utilities: `.btn-primary`, `.btn-secondary`, `.btn-outline`, `.btn-ghost`, `.clickable`, `.card-interactive`
+- Accessibility-first
+  - High-contrast foregrounds on themed backgrounds
+  - Touch target utilities (`.touch-target`) and mobile text sizing rules
+  - Reduced cognitive load through consistent semantics and spacing
+
+Component Library (shadcn/ui + custom)
+- shadcn/ui primitives under `src/components/ui`: accordion, alert(-dialog), avatar, badge, breadcrumb, button, calendar, card, carousel, chart, checkbox, collapsible, command, context-menu, dialog, drawer, dropdown-menu, form, hover-card, input(-otp), label, menubar, navigation-menu, pagination, popover, progress, radio-group, resizable, scroll-area, select, separator, sheet, sidebar, skeleton, slider, sonner, switch, table, tabs, textarea, toast, toaster, toggle(-group), tooltip, use-toast
+- Custom feature components under `src/components`:
+  - Data capture & workflows: `FRAApplicationForm`, `FRAApplicationList`, `AlertManagement`, `AlertViewer`
+  - Mapping & spatial: `MapView`, `AIMapView`, `ForestLayout`, `ControlPanel`, `DetailsDrawer`
+  - AI & insights: `AIAssetAnalysis`, `AIInsightsDashboard`, `AIFRAValidation`, `ChatWidget`
+  - Content & UI: `Header`, `BottomNavigation`, `PhotoSlider`, `FAQSection`, `ContactSection`, `SecretShortcut`, `ProtectedRoute`, `RoleSpecificDashboard`, `Groundwater3D`
+
+Navigation & Pages
+- Top-level routes in `src/App.tsx` with `RoleBasedRouter` and fallbacks
+- Pages under `src/pages`: Landing, LimitedLanding, RoleSelection, GovernmentDashboard, LocalDashboard, TribalDashboard, WelfareDashboard, ForestRevenueDashboard, PlanningDevelopmentDashboard, NGODashboard, AnalyzeDocuments, Documentation, Security, Status, Login, SignUp, NotFound
+- `ChatWidget` mounted globally for contextual assistance
+
+Maps & Geo UI
+- Leaflet container styling in `index.css`: full-width, responsive, z-index layering to avoid UI overlap
+- Viewport utilities: `.map-viewport`, `forest-*` layers ensure panel/map stacking order
+- Control panel & drawer: responsive off-canvas patterns for tools/filters on mobile
+
+Charts & Analytics
+- Recharts for dashboards and summaries; consistent palette via theme tokens
+- Progress/Status primitives using shadcn components for badges, toasts, and progress bars
+
+Forms & Validation
+- React Hook Form with Zod resolvers for robust validation UX
+- Consistent inputs via shadcn `input`, `select`, `textarea`, `form` helpers
+- Accessible focus states: ring/border tokens aligned with theme (`--ring`, `--border`)
+
+Notifications & Feedback
+- Dual toasters: shadcn `Toaster` and Sonner for light, transient feedback
+- TooltipProvider globally for micro-explanations
+
+Internationalization (i18n)
+- i18next + react-i18next configured in `src/i18n.ts`
+- Languages bundled: English (en), Hindi (hi), Telugu (te), Odia (or), Bengali (bn)
+- Language persistence via `localStorage` and dynamic `lang` attribute updates
+
+Responsive & Mobile UX
+- Utility layer adds mobile ergonomics: `.mobile-*` classes for text sizing, spacing, layout, break-words
+- Prevents iOS zoom on input focus (16px rule)
+- Drawer/panel patterns (`.mobile-drawer`, `.mobile-control-panel`) for small screens
+
+Icons & Symbols
+- `lucide-react` provides consistent, crisp line icons aligned with the forest/administrative theme
+- Status colors map to tokens: approved (green), pending (amber), rejected (red)
+
+Performance & DX
+- Vite dev server, SWC React plugin, TypeScript strictness
+- Shadcn codegen aligned with `components.json` aliases and Tailwind config
+- Assets served from `public`, geospatial JSON data colocated for local demos
+
+How to Extend
+- Add themed components by referencing HSL CSS variables; never hardcode colors
+- Prefer shadcn primitives for consistency and accessibility
+- When adding routes, wrap with `ProtectedRoute` as needed and consider role mapping in `RoleBasedRouter`
+- For new languages, drop `translation.json` under `src/locales/<lng>` and register in `src/i18n.ts`
+
+File Pointers
+- Theme and utilities: `src/index.css`, `tailwind.config.ts`
+- App shell and routing: `src/App.tsx`, `src/main.tsx`
+- Components: `src/components`, `src/components/ui`
+- Pages: `src/pages`
+- i18n: `src/i18n.ts`, `src/locales/*/translation.json`
+- Icons: `lucide-react`
+- Maps: `react-leaflet` + Leaflet styles in `index.css`

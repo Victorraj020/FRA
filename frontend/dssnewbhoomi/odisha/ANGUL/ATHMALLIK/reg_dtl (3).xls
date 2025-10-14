@@ -1,0 +1,140 @@
+
+              <table align="center" width="70%" border="1" bordercolor="#EBEBEB" style="border-collapse:collapse " cellspacing="0" >
+                <tr bgcolor="#d2ffd2">
+                <td align="center" rowspan="1"><b>S No.</b></td>
+                 
+               <td align="center" rowspan="1"><b> Registration No.</b></td>
+              <td align="center" rowspan="1" ><b>Head of Household</b></td>
+               <td align="center" rowspan="1"><b>Caste</b></td>
+              <td align="center" rowspan="1" ><b>Family_ID</b></td>
+               <td align="center" rowspan="1" ><b>Extent of land(in acres)</b></td>
+                
+            
+               </tr>
+                
+                </td>
+                </tr>
+                
+                
+                <tr>
+                 <td align="center">1</td>
+                 
+                 <td align="left">OR-21-003-004-004/1507</td>
+                 <td align="left">HATIA MIRDHA</td>
+                 <td align="left">ST</td>
+                 <td align="right">1507</td>
+                   <td align="right">0.04</td>
+                
+                   
+                </tr>
+                
+                <tr>
+                 <td align="center">2</td>
+                 
+                 <td align="left">OR-21-003-004-004/1509</td>
+                 <td align="left">PRAPHULA MIRDHA</td>
+                 <td align="left">SC</td>
+                 <td align="right">1509</td>
+                   <td align="right">0.04</td>
+                
+                   
+                </tr>
+                
+                <tr>
+                 <td align="center">3</td>
+                 
+                 <td align="left">OR-21-003-004-004/1532</td>
+                 <td align="left">NARENDRA DEHURY</td>
+                 <td align="left">ST</td>
+                 <td align="right">1532</td>
+                   <td align="right">0.04</td>
+                
+                   
+                </tr>
+                
+                <tr>
+                 <td align="center">4</td>
+                 
+                 <td align="left">OR-21-003-004-004/1538</td>
+                 <td align="left">KUBERA NAIK</td>
+                 <td align="left">SC</td>
+                 <td align="right">1538</td>
+                   <td align="right">0.08</td>
+                
+                   
+                </tr>
+                
+                <tr>
+                 <td align="center">5</td>
+                 
+                 <td align="left">OR-21-003-004-005/1223</td>
+                 <td align="left">NANDA MIRDHA</td>
+                 <td align="left">ST</td>
+                 <td align="right">1223</td>
+                   <td align="right">0.04</td>
+                
+                   
+                </tr>
+                
+                <tr>
+                 <td align="center">6</td>
+                 
+                 <td align="left">OR-21-003-004-005/1224</td>
+                 <td align="left">SURESA DEHURI</td>
+                 <td align="left">ST</td>
+                 <td align="right">1224</td>
+                   <td align="right">0.04</td>
+                
+                   
+                </tr>
+                
+                <tr>
+                 <td align="center">7</td>
+                 
+                 <td align="left">OR-21-003-004-005/1225</td>
+                 <td align="left">BIJAYA DEHURI</td>
+                 <td align="left">ST</td>
+                 <td align="right">1225</td>
+                   <td align="right">0.04</td>
+                
+                   
+                </tr>
+                
+                <tr>
+                 <td align="center">8</td>
+                 
+                 <td align="left">OR-21-003-004-005/1228</td>
+                 <td align="left">JUJESTI DEHURI</td>
+                 <td align="left">ST</td>
+                 <td align="right">1228</td>
+                   <td align="right">0.04</td>
+                
+                   
+                </tr>
+                
+                <tr>
+                 <td align="center">9</td>
+                 
+                 <td align="left">OR-21-003-004-011/1063</td>
+                 <td align="left">INDRAMANI NAIK</td>
+                 <td align="left">ST</td>
+                 <td align="right">1063</td>
+                   <td align="right">0.1</td>
+                
+                   
+                </tr>
+                
+                <tr>
+                 <td align="center">10</td>
+                 
+                 <td align="left">OR-21-003-004-011/23891</td>
+                 <td align="left">SAMBARU BEHERA</td>
+                 <td align="left">ST</td>
+                 <td align="right">23891</td>
+                   <td align="right">0.04</td>
+                
+                   
+                </tr>
+                
+            </table>
+            

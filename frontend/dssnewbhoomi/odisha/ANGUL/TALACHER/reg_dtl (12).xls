@@ -1,0 +1,104 @@
+
+              <table align="center" width="70%" border="1" bordercolor="#EBEBEB" style="border-collapse:collapse " cellspacing="0" >
+                <tr bgcolor="#d2ffd2">
+                <td align="center" rowspan="1"><b>S No.</b></td>
+                 
+               <td align="center" rowspan="1"><b> Registration No.</b></td>
+              <td align="center" rowspan="1" ><b>Head of Household</b></td>
+               <td align="center" rowspan="1"><b>Caste</b></td>
+              <td align="center" rowspan="1" ><b>Family_ID</b></td>
+               <td align="center" rowspan="1" ><b>Extent of land(in acres)</b></td>
+                
+            
+               </tr>
+                
+                </td>
+                </tr>
+                
+                
+                <tr>
+                 <td align="center">1</td>
+                 
+                 <td align="left">OR-21-001-003-006/21034</td>
+                 <td align="left">KALIA DEHURI</td>
+                 <td align="left">OTH</td>
+                 <td align="right">21034</td>
+                   <td align="right">0.09</td>
+                
+                   
+                </tr>
+                
+                <tr>
+                 <td align="center">2</td>
+                 
+                 <td align="left">OR-21-001-003-006/21059</td>
+                 <td align="left">SHESHA KHATUA</td>
+                 <td align="left">OTH</td>
+                 <td align="right">21059</td>
+                   <td align="right">0.1</td>
+                
+                   
+                </tr>
+                
+                <tr>
+                 <td align="center">3</td>
+                 
+                 <td align="left">OR-21-001-003-006/21060</td>
+                 <td align="left">SUBASH KHATUA</td>
+                 <td align="left">ST</td>
+                 <td align="right">21060</td>
+                   <td align="right">0.08</td>
+                
+                   
+                </tr>
+                
+                <tr>
+                 <td align="center">4</td>
+                 
+                 <td align="left">OR-21-001-003-006/21061</td>
+                 <td align="left">JHARI PALEI</td>
+                 <td align="left">ST</td>
+                 <td align="right">21061</td>
+                   <td align="right">0.13</td>
+                
+                   
+                </tr>
+                
+                <tr>
+                 <td align="center">5</td>
+                 
+                 <td align="left">OR-21-001-003-006/21062</td>
+                 <td align="left">PRAMILA KHATUA</td>
+                 <td align="left">ST</td>
+                 <td align="right">21062</td>
+                   <td align="right">0.1</td>
+                
+                   
+                </tr>
+                
+                <tr>
+                 <td align="center">6</td>
+                 
+                 <td align="left">OR-21-001-003-006/21063</td>
+                 <td align="left">BIJAY DEHURI</td>
+                 <td align="left">ST</td>
+                 <td align="right">21063</td>
+                   <td align="right">0.16</td>
+                
+                   
+                </tr>
+                
+                <tr>
+                 <td align="center">7</td>
+                 
+                 <td align="left">OR-21-001-003-006/21067</td>
+                 <td align="left">KUMUDINI KHATUA</td>
+                 <td align="left">ST</td>
+                 <td align="right">21067</td>
+                   <td align="right">0.11</td>
+                
+                   
+                </tr>
+                
+            </table>
+            

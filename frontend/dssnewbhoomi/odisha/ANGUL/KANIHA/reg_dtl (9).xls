@@ -1,0 +1,200 @@
+
+              <table align="center" width="70%" border="1" bordercolor="#EBEBEB" style="border-collapse:collapse " cellspacing="0" >
+                <tr bgcolor="#d2ffd2">
+                <td align="center" rowspan="1"><b>S No.</b></td>
+                 
+               <td align="center" rowspan="1"><b> Registration No.</b></td>
+              <td align="center" rowspan="1" ><b>Head of Household</b></td>
+               <td align="center" rowspan="1"><b>Caste</b></td>
+              <td align="center" rowspan="1" ><b>Family_ID</b></td>
+               <td align="center" rowspan="1" ><b>Extent of land(in acres)</b></td>
+                
+            
+               </tr>
+                
+                </td>
+                </tr>
+                
+                
+                <tr>
+                 <td align="center">1</td>
+                 
+                 <td align="left">OR-21-002-012-001/13036</td>
+                 <td align="left">Gopal Singh</td>
+                 <td align="left">ST</td>
+                 <td align="right">13036</td>
+                   <td align="right">0.48</td>
+                
+                   
+                </tr>
+                
+                <tr>
+                 <td align="center">2</td>
+                 
+                 <td align="left">OR-21-002-012-001/13037</td>
+                 <td align="left">Laxmidhar Singh</td>
+                 <td align="left">ST</td>
+                 <td align="right">13037</td>
+                   <td align="right">0.05</td>
+                
+                   
+                </tr>
+                
+                <tr>
+                 <td align="center">3</td>
+                 
+                 <td align="left">OR-21-002-012-001/13038</td>
+                 <td align="left">Sundar Marandi</td>
+                 <td align="left">ST</td>
+                 <td align="right">13038</td>
+                   <td align="right">0.05</td>
+                
+                   
+                </tr>
+                
+                <tr>
+                 <td align="center">4</td>
+                 
+                 <td align="left">OR-21-002-012-001/13039</td>
+                 <td align="left">Surendra Murmu</td>
+                 <td align="left">ST</td>
+                 <td align="right">13039</td>
+                   <td align="right">0.14</td>
+                
+                   
+                </tr>
+                
+                <tr>
+                 <td align="center">5</td>
+                 
+                 <td align="left">OR-21-002-012-001/13040</td>
+                 <td align="left">Salu Tudu</td>
+                 <td align="left">ST</td>
+                 <td align="right">13040</td>
+                   <td align="right">0.08</td>
+                
+                   
+                </tr>
+                
+                <tr>
+                 <td align="center">6</td>
+                 
+                 <td align="left">OR-21-002-012-001/13042</td>
+                 <td align="left">Ram Murmu</td>
+                 <td align="left">ST</td>
+                 <td align="right">13042</td>
+                   <td align="right">0.33</td>
+                
+                   
+                </tr>
+                
+                <tr>
+                 <td align="center">7</td>
+                 
+                 <td align="left">OR-21-002-012-001/13043</td>
+                 <td align="left">Damu Hembram</td>
+                 <td align="left">ST</td>
+                 <td align="right">13043</td>
+                   <td align="right">0.13</td>
+                
+                   
+                </tr>
+                
+                <tr>
+                 <td align="center">8</td>
+                 
+                 <td align="left">OR-21-002-012-001/13045</td>
+                 <td align="left">Phurlai Murmu</td>
+                 <td align="left">ST</td>
+                 <td align="right">13045</td>
+                   <td align="right">0.08</td>
+                
+                   
+                </tr>
+                
+                <tr>
+                 <td align="center">9</td>
+                 
+                 <td align="left">OR-21-002-012-001/13046</td>
+                 <td align="left">Manuram Murmu</td>
+                 <td align="left">ST</td>
+                 <td align="right">13046</td>
+                   <td align="right">0.12</td>
+                
+                   
+                </tr>
+                
+                <tr>
+                 <td align="center">10</td>
+                 
+                 <td align="left">OR-21-002-012-001/13049</td>
+                 <td align="left">Lemba Hembram</td>
+                 <td align="left">ST</td>
+                 <td align="right">13049</td>
+                   <td align="right">0.04</td>
+                
+                   
+                </tr>
+                
+                <tr>
+                 <td align="center">11</td>
+                 
+                 <td align="left">OR-21-002-012-001/13051</td>
+                 <td align="left">Biram Suren</td>
+                 <td align="left">ST</td>
+                 <td align="right">13051</td>
+                   <td align="right">0.7</td>
+                
+                   
+                </tr>
+                
+                <tr>
+                 <td align="center">12</td>
+                 
+                 <td align="left">OR-21-002-012-001/27944</td>
+                 <td align="left">DOMAN HANSHADA</td>
+                 <td align="left">ST</td>
+                 <td align="right">27944</td>
+                   <td align="right">0.08</td>
+                
+                   
+                </tr>
+                
+                <tr>
+                 <td align="center">13</td>
+                 
+                 <td align="left">OR-21-002-012-001/280250</td>
+                 <td align="left">LAKHAN MURMU</td>
+                 <td align="left">ST</td>
+                 <td align="right">280250</td>
+                   <td align="right">0.08</td>
+                
+                   
+                </tr>
+                
+                <tr>
+                 <td align="center">14</td>
+                 
+                 <td align="left">OR-21-002-012-005/12246</td>
+                 <td align="left">Gopinath Behera</td>
+                 <td align="left">ST</td>
+                 <td align="right">12246</td>
+                   <td align="right">1.6</td>
+                
+                   
+                </tr>
+                
+                <tr>
+                 <td align="center">15</td>
+                 
+                 <td align="left">OR-21-002-012-005/12303</td>
+                 <td align="left">Bhuinya Pradhan</td>
+                 <td align="left">ST</td>
+                 <td align="right">12303</td>
+                   <td align="right">0.5</td>
+                
+                   
+                </tr>
+                
+            </table>
+            

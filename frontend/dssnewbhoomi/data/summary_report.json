@@ -1,0 +1,10 @@
+{
+  "total_villages": 30000,
+  "avg_jjm_coverage": 0.0,
+  "avg_water_stress": 0.29999999999999993,
+  "priority_distribution": {
+    "low": 30000,
+    "medium": 0,
+    "high": 0
+  }
+}

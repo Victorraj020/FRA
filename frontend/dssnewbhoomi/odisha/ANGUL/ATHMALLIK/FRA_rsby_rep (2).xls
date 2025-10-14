@@ -1,0 +1,1029 @@
+
+                <table align="center" width="90%" border="1" bordercolor="black" style="border-collapse: collapse"
+                    cellspacing="0">
+                    <tr bgcolor="#d2ffd2">
+                        <td align="center" rowspan="3">
+                            <b>S No.</b>
+                        </td>
+                        
+                        <td align="center" rowspan="3">
+                            <b>Panchayats</b>
+                        </td>
+                        
+                        <td align="center" rowspan="3">
+                            <b>Total FRA Beneficiaries Registered</b>
+                        </td>
+                        <td align="center" rowspan="3">
+                            <b>No. of FRA Beneficiaries Having Private Land</b>
+                        </td>
+                        <td align="center" rowspan="3">
+                            <b>Extent of Land (in Acre)</b>
+                        </td>
+                        <td align="center" colspan="6">
+                            <b>Employment Availed(2023-2024)</b>
+                        </td>
+                    </tr>
+                    <tr bgcolor="#d2ffd2">
+                        <td align="center" colspan="3">
+                            <b>Current Year(2025-2026)</b>
+                        </td>
+                        <td align="center" colspan="3">
+                            <b>Previous Year(2024-2025)</b>
+                        </td>
+                    </tr>
+                    <tr bgcolor="#d2ffd2" valign="top">
+                        <td align="center">
+                            <b>HHs availed 100 Days</b>
+                        </td>
+                        <td align="center">
+                            <b>HHs availed 101 to 149 Days</b>
+                        </td>
+                        <td align="center">
+                            <b>HHs availed 150 Days</b>
+                        </td>
+                        <td align="center">
+                            <b>HHs availed 100 Days</b>
+                        </td>
+                        <td align="center">
+                            <b>HHs availed 101 to 149 Days</b>
+                        </td>
+                        <td align="center">
+                            <b>HHs availed 150 Days</b>
+                        </td>
+                    </tr>
+                    
+                    <tr bgcolor="#d2ffd2" align="center">
+                        
+                        <td>
+                            1
+                        </td>
+                        
+                        <td>
+                            2
+                        </td>
+                        
+                        <td>
+                            3
+                        </td>
+                        
+                        <td>
+                            4
+                        </td>
+                        
+                        <td>
+                            5
+                        </td>
+                        
+                        <td>
+                            6
+                        </td>
+                        
+                        <td>
+                            7
+                        </td>
+                        
+                        <td>
+                            8
+                        </td>
+                        
+                        <td>
+                            9
+                        </td>
+                        
+                        <td>
+                            10
+                        </td>
+                        
+                        <td>
+                            11
+                        </td>
+                        
+                    </tr>
+                    
+                <tr>
+                    <td align="center">
+                        1
+                    </td>
+                    <td align="left">
+                        AIDA
+                    </td>
+                    
+                    <td align="right">
+                        0
+                    </td>
+                    <td align="right">
+                        0
+                    </td>
+                    <td align="right">
+                        0
+                    </td>
+                    <td align="right">
+                        0
+                    </td>
+                    <td align="right">
+                        0
+                    </td>
+                    <td align="right">
+                        0
+                    </td>
+                    <td align="right">
+                        0
+                    </td>
+                      <td align="right">
+                        0
+                    </td>
+                    <td align="right">
+                        0
+                    </td>
+                </tr>
+            
+                <tr>
+                    <td align="center">
+                        2
+                    </td>
+                    <td align="left">
+                        AMBASARMUNDA
+                    </td>
+                    
+                    <td align="right">
+                        <a href='reg_dtl.aspx?lflag=eng&state_name=ODISHA&state_code=24&district_name=ANGUL&district_code=2421&block_code=2421003&block_name=ATHMALLIK&panchayat_code=2421003002&panchayat_name=AMBASARMUNDA&fin_year=2021-2022&source=national&Digest=pDug9+64lhfLYHhE4fRX5g'>19</a>
+                    </td>
+                    <td align="right">
+                        0
+                    </td>
+                    <td align="right">
+                        27.05
+                    </td>
+                    <td align="right">
+                        0
+                    </td>
+                    <td align="right">
+                        0
+                    </td>
+                    <td align="right">
+                        0
+                    </td>
+                    <td align="right">
+                        0
+                    </td>
+                      <td align="right">
+                        1
+                    </td>
+                    <td align="right">
+                        0
+                    </td>
+                </tr>
+            
+                <tr>
+                    <td align="center">
+                        3
+                    </td>
+                    <td align="left">
+                        BASUDEVPUR
+                    </td>
+                    
+                    <td align="right">
+                        0
+                    </td>
+                    <td align="right">
+                        0
+                    </td>
+                    <td align="right">
+                        0
+                    </td>
+                    <td align="right">
+                        0
+                    </td>
+                    <td align="right">
+                        0
+                    </td>
+                    <td align="right">
+                        0
+                    </td>
+                    <td align="right">
+                        0
+                    </td>
+                      <td align="right">
+                        0
+                    </td>
+                    <td align="right">
+                        0
+                    </td>
+                </tr>
+            
+                <tr>
+                    <td align="center">
+                        4
+                    </td>
+                    <td align="left">
+                        JAMUDOLI
+                    </td>
+                    
+                    <td align="right">
+                        <a href='reg_dtl.aspx?lflag=eng&state_name=ODISHA&state_code=24&district_name=ANGUL&district_code=2421&block_code=2421003&block_name=ATHMALLIK&panchayat_code=2421003004&panchayat_name=JAMUDOLI&fin_year=2021-2022&source=national&Digest=oLLVJZDVqucj28MVvKiPWg'>10</a>
+                    </td>
+                    <td align="right">
+                        0
+                    </td>
+                    <td align="right">
+                        0.5
+                    </td>
+                    <td align="right">
+                        0
+                    </td>
+                    <td align="right">
+                        0
+                    </td>
+                    <td align="right">
+                        0
+                    </td>
+                    <td align="right">
+                        0
+                    </td>
+                      <td align="right">
+                        0
+                    </td>
+                    <td align="right">
+                        0
+                    </td>
+                </tr>
+            
+                <tr>
+                    <td align="center">
+                        5
+                    </td>
+                    <td align="left">
+                        KAMPALA
+                    </td>
+                    
+                    <td align="right">
+                        0
+                    </td>
+                    <td align="right">
+                        0
+                    </td>
+                    <td align="right">
+                        0
+                    </td>
+                    <td align="right">
+                        0
+                    </td>
+                    <td align="right">
+                        0
+                    </td>
+                    <td align="right">
+                        0
+                    </td>
+                    <td align="right">
+                        0
+                    </td>
+                      <td align="right">
+                        0
+                    </td>
+                    <td align="right">
+                        0
+                    </td>
+                </tr>
+            
+                <tr>
+                    <td align="center">
+                        6
+                    </td>
+                    <td align="left">
+                        KANDHAPADA
+                    </td>
+                    
+                    <td align="right">
+                        0
+                    </td>
+                    <td align="right">
+                        0
+                    </td>
+                    <td align="right">
+                        0
+                    </td>
+                    <td align="right">
+                        0
+                    </td>
+                    <td align="right">
+                        0
+                    </td>
+                    <td align="right">
+                        0
+                    </td>
+                    <td align="right">
+                        0
+                    </td>
+                      <td align="right">
+                        0
+                    </td>
+                    <td align="right">
+                        0
+                    </td>
+                </tr>
+            
+                <tr>
+                    <td align="center">
+                        7
+                    </td>
+                    <td align="left">
+                        KANTAPADA
+                    </td>
+                    
+                    <td align="right">
+                        0
+                    </td>
+                    <td align="right">
+                        0
+                    </td>
+                    <td align="right">
+                        0
+                    </td>
+                    <td align="right">
+                        0
+                    </td>
+                    <td align="right">
+                        0
+                    </td>
+                    <td align="right">
+                        0
+                    </td>
+                    <td align="right">
+                        0
+                    </td>
+                      <td align="right">
+                        0
+                    </td>
+                    <td align="right">
+                        0
+                    </td>
+                </tr>
+            
+                <tr>
+                    <td align="center">
+                        8
+                    </td>
+                    <td align="left">
+                        KIAKATA
+                    </td>
+                    
+                    <td align="right">
+                        0
+                    </td>
+                    <td align="right">
+                        0
+                    </td>
+                    <td align="right">
+                        0
+                    </td>
+                    <td align="right">
+                        0
+                    </td>
+                    <td align="right">
+                        0
+                    </td>
+                    <td align="right">
+                        0
+                    </td>
+                    <td align="right">
+                        0
+                    </td>
+                      <td align="right">
+                        0
+                    </td>
+                    <td align="right">
+                        0
+                    </td>
+                </tr>
+            
+                <tr>
+                    <td align="center">
+                        9
+                    </td>
+                    <td align="left">
+                        KRUTIBASPUR
+                    </td>
+                    
+                    <td align="right">
+                        <a href='reg_dtl.aspx?lflag=eng&state_name=ODISHA&state_code=24&district_name=ANGUL&district_code=2421&block_code=2421003&block_name=ATHMALLIK&panchayat_code=2421003009&panchayat_name=KRUTIBASPUR&fin_year=2021-2022&source=national&Digest=8O2iVXFyGajdi7rTfONyxA'>1</a>
+                    </td>
+                    <td align="right">
+                        0
+                    </td>
+                    <td align="right">
+                        0.6
+                    </td>
+                    <td align="right">
+                        0
+                    </td>
+                    <td align="right">
+                        0
+                    </td>
+                    <td align="right">
+                        0
+                    </td>
+                    <td align="right">
+                        0
+                    </td>
+                      <td align="right">
+                        0
+                    </td>
+                    <td align="right">
+                        0
+                    </td>
+                </tr>
+            
+                <tr>
+                    <td align="center">
+                        10
+                    </td>
+                    <td align="left">
+                        KUDAGAON
+                    </td>
+                    
+                    <td align="right">
+                        <a href='reg_dtl.aspx?lflag=eng&state_name=ODISHA&state_code=24&district_name=ANGUL&district_code=2421&block_code=2421003&block_name=ATHMALLIK&panchayat_code=2421003010&panchayat_name=KUDAGAON&fin_year=2021-2022&source=national&Digest=mvj4YGVM53l6gNWyBJhaYw'>4</a>
+                    </td>
+                    <td align="right">
+                        0
+                    </td>
+                    <td align="right">
+                        3.05
+                    </td>
+                    <td align="right">
+                        0
+                    </td>
+                    <td align="right">
+                        0
+                    </td>
+                    <td align="right">
+                        0
+                    </td>
+                    <td align="right">
+                        0
+                    </td>
+                      <td align="right">
+                        0
+                    </td>
+                    <td align="right">
+                        0
+                    </td>
+                </tr>
+            
+                <tr>
+                    <td align="center">
+                        11
+                    </td>
+                    <td align="left">
+                        KURUMTAP
+                    </td>
+                    
+                    <td align="right">
+                        <a href='reg_dtl.aspx?lflag=eng&state_name=ODISHA&state_code=24&district_name=ANGUL&district_code=2421&block_code=2421003&block_name=ATHMALLIK&panchayat_code=2421003011&panchayat_name=KURUMTAP&fin_year=2021-2022&source=national&Digest=QP2LRRixy2eWtiG//6+o4Q'>7</a>
+                    </td>
+                    <td align="right">
+                        0
+                    </td>
+                    <td align="right">
+                        1.29
+                    </td>
+                    <td align="right">
+                        0
+                    </td>
+                    <td align="right">
+                        0
+                    </td>
+                    <td align="right">
+                        0
+                    </td>
+                    <td align="right">
+                        0
+                    </td>
+                      <td align="right">
+                        0
+                    </td>
+                    <td align="right">
+                        0
+                    </td>
+                </tr>
+            
+                <tr>
+                    <td align="center">
+                        12
+                    </td>
+                    <td align="left">
+                        LUHASINGHA
+                    </td>
+                    
+                    <td align="right">
+                        0
+                    </td>
+                    <td align="right">
+                        0
+                    </td>
+                    <td align="right">
+                        0
+                    </td>
+                    <td align="right">
+                        0
+                    </td>
+                    <td align="right">
+                        0
+                    </td>
+                    <td align="right">
+                        0
+                    </td>
+                    <td align="right">
+                        0
+                    </td>
+                      <td align="right">
+                        0
+                    </td>
+                    <td align="right">
+                        0
+                    </td>
+                </tr>
+            
+                <tr>
+                    <td align="center">
+                        13
+                    </td>
+                    <td align="left">
+                        LUNAHANDI
+                    </td>
+                    
+                    <td align="right">
+                        0
+                    </td>
+                    <td align="right">
+                        0
+                    </td>
+                    <td align="right">
+                        0
+                    </td>
+                    <td align="right">
+                        0
+                    </td>
+                    <td align="right">
+                        0
+                    </td>
+                    <td align="right">
+                        0
+                    </td>
+                    <td align="right">
+                        0
+                    </td>
+                      <td align="right">
+                        0
+                    </td>
+                    <td align="right">
+                        0
+                    </td>
+                </tr>
+            
+                <tr>
+                    <td align="center">
+                        14
+                    </td>
+                    <td align="left">
+                        MADHAPUR
+                    </td>
+                    
+                    <td align="right">
+                        0
+                    </td>
+                    <td align="right">
+                        0
+                    </td>
+                    <td align="right">
+                        0
+                    </td>
+                    <td align="right">
+                        0
+                    </td>
+                    <td align="right">
+                        0
+                    </td>
+                    <td align="right">
+                        0
+                    </td>
+                    <td align="right">
+                        0
+                    </td>
+                      <td align="right">
+                        0
+                    </td>
+                    <td align="right">
+                        0
+                    </td>
+                </tr>
+            
+                <tr>
+                    <td align="center">
+                        15
+                    </td>
+                    <td align="left">
+                        MAIMURA
+                    </td>
+                    
+                    <td align="right">
+                        0
+                    </td>
+                    <td align="right">
+                        0
+                    </td>
+                    <td align="right">
+                        0
+                    </td>
+                    <td align="right">
+                        0
+                    </td>
+                    <td align="right">
+                        0
+                    </td>
+                    <td align="right">
+                        0
+                    </td>
+                    <td align="right">
+                        0
+                    </td>
+                      <td align="right">
+                        0
+                    </td>
+                    <td align="right">
+                        0
+                    </td>
+                </tr>
+            
+                <tr>
+                    <td align="center">
+                        16
+                    </td>
+                    <td align="left">
+                        NAGAON
+                    </td>
+                    
+                    <td align="right">
+                        <a href='reg_dtl.aspx?lflag=eng&state_name=ODISHA&state_code=24&district_name=ANGUL&district_code=2421&block_code=2421003&block_name=ATHMALLIK&panchayat_code=2421003016&panchayat_name=NAGAON&fin_year=2021-2022&source=national&Digest=7FTGdtWhLzImtQG795OfOg'>20</a>
+                    </td>
+                    <td align="right">
+                        0
+                    </td>
+                    <td align="right">
+                        2.5
+                    </td>
+                    <td align="right">
+                        0
+                    </td>
+                    <td align="right">
+                        0
+                    </td>
+                    <td align="right">
+                        0
+                    </td>
+                    <td align="right">
+                        0
+                    </td>
+                      <td align="right">
+                        0
+                    </td>
+                    <td align="right">
+                        0
+                    </td>
+                </tr>
+            
+                <tr>
+                    <td align="center">
+                        17
+                    </td>
+                    <td align="left">
+                        PAIKASAHI
+                    </td>
+                    
+                    <td align="right">
+                        0
+                    </td>
+                    <td align="right">
+                        0
+                    </td>
+                    <td align="right">
+                        0
+                    </td>
+                    <td align="right">
+                        0
+                    </td>
+                    <td align="right">
+                        0
+                    </td>
+                    <td align="right">
+                        0
+                    </td>
+                    <td align="right">
+                        0
+                    </td>
+                      <td align="right">
+                        0
+                    </td>
+                    <td align="right">
+                        0
+                    </td>
+                </tr>
+            
+                <tr>
+                    <td align="center">
+                        18
+                    </td>
+                    <td align="left">
+                        PEDIPATHAR
+                    </td>
+                    
+                    <td align="right">
+                        0
+                    </td>
+                    <td align="right">
+                        0
+                    </td>
+                    <td align="right">
+                        0
+                    </td>
+                    <td align="right">
+                        0
+                    </td>
+                    <td align="right">
+                        0
+                    </td>
+                    <td align="right">
+                        0
+                    </td>
+                    <td align="right">
+                        0
+                    </td>
+                      <td align="right">
+                        0
+                    </td>
+                    <td align="right">
+                        0
+                    </td>
+                </tr>
+            
+                <tr>
+                    <td align="center">
+                        19
+                    </td>
+                    <td align="left">
+                        PURUNAMANITRI
+                    </td>
+                    
+                    <td align="right">
+                        <a href='reg_dtl.aspx?lflag=eng&state_name=ODISHA&state_code=24&district_name=ANGUL&district_code=2421&block_code=2421003&block_name=ATHMALLIK&panchayat_code=2421003019&panchayat_name=PURUNAMANITRI&fin_year=2021-2022&source=national&Digest=cNDG2crVWVD2drz5LryCMA'>5</a>
+                    </td>
+                    <td align="right">
+                        0
+                    </td>
+                    <td align="right">
+                        9.47
+                    </td>
+                    <td align="right">
+                        0
+                    </td>
+                    <td align="right">
+                        0
+                    </td>
+                    <td align="right">
+                        0
+                    </td>
+                    <td align="right">
+                        0
+                    </td>
+                      <td align="right">
+                        0
+                    </td>
+                    <td align="right">
+                        0
+                    </td>
+                </tr>
+            
+                <tr>
+                    <td align="center">
+                        20
+                    </td>
+                    <td align="left">
+                        SANAHULA
+                    </td>
+                    
+                    <td align="right">
+                        0
+                    </td>
+                    <td align="right">
+                        0
+                    </td>
+                    <td align="right">
+                        0
+                    </td>
+                    <td align="right">
+                        0
+                    </td>
+                    <td align="right">
+                        0
+                    </td>
+                    <td align="right">
+                        0
+                    </td>
+                    <td align="right">
+                        0
+                    </td>
+                      <td align="right">
+                        0
+                    </td>
+                    <td align="right">
+                        0
+                    </td>
+                </tr>
+            
+                <tr>
+                    <td align="center">
+                        21
+                    </td>
+                    <td align="left">
+                        SAPAGHAR
+                    </td>
+                    
+                    <td align="right">
+                        0
+                    </td>
+                    <td align="right">
+                        0
+                    </td>
+                    <td align="right">
+                        0
+                    </td>
+                    <td align="right">
+                        0
+                    </td>
+                    <td align="right">
+                        0
+                    </td>
+                    <td align="right">
+                        0
+                    </td>
+                    <td align="right">
+                        0
+                    </td>
+                      <td align="right">
+                        0
+                    </td>
+                    <td align="right">
+                        0
+                    </td>
+                </tr>
+            
+                <tr>
+                    <td align="center">
+                        22
+                    </td>
+                    <td align="left">
+                        TAPDHOL
+                    </td>
+                    
+                    <td align="right">
+                        0
+                    </td>
+                    <td align="right">
+                        0
+                    </td>
+                    <td align="right">
+                        0
+                    </td>
+                    <td align="right">
+                        0
+                    </td>
+                    <td align="right">
+                        0
+                    </td>
+                    <td align="right">
+                        0
+                    </td>
+                    <td align="right">
+                        0
+                    </td>
+                      <td align="right">
+                        0
+                    </td>
+                    <td align="right">
+                        0
+                    </td>
+                </tr>
+            
+                <tr>
+                    <td align="center">
+                        23
+                    </td>
+                    <td align="left">
+                        THAKURGARH
+                    </td>
+                    
+                    <td align="right">
+                        <a href='reg_dtl.aspx?lflag=eng&state_name=ODISHA&state_code=24&district_name=ANGUL&district_code=2421&block_code=2421003&block_name=ATHMALLIK&panchayat_code=2421003023&panchayat_name=THAKURGARH&fin_year=2021-2022&source=national&Digest=Uk2mGsdvQPQvRU7qokMNyA'>20</a>
+                    </td>
+                    <td align="right">
+                        0
+                    </td>
+                    <td align="right">
+                        21.39
+                    </td>
+                    <td align="right">
+                        0
+                    </td>
+                    <td align="right">
+                        0
+                    </td>
+                    <td align="right">
+                        0
+                    </td>
+                    <td align="right">
+                        0
+                    </td>
+                      <td align="right">
+                        0
+                    </td>
+                    <td align="right">
+                        0
+                    </td>
+                </tr>
+            
+                <tr>
+                    <td align="center">
+                        24
+                    </td>
+                    <td align="left">
+                        TUSAR
+                    </td>
+                    
+                    <td align="right">
+                        0
+                    </td>
+                    <td align="right">
+                        0
+                    </td>
+                    <td align="right">
+                        0
+                    </td>
+                    <td align="right">
+                        0
+                    </td>
+                    <td align="right">
+                        0
+                    </td>
+                    <td align="right">
+                        0
+                    </td>
+                    <td align="right">
+                        0
+                    </td>
+                      <td align="right">
+                        0
+                    </td>
+                    <td align="right">
+                        0
+                    </td>
+                </tr>
+            
+                <tr>
+                    <td align="center">
+                        
+                    </td>
+                    <td align="left">
+                        <b>Total</b>
+                    </td>
+                    
+                    <td align="right">
+                        <b>86</b>
+                    </td>
+                    <td align="right">
+                        <b>0</b>
+                    </td>
+                    <td align="right">
+                        <b>65.85</b>
+                    </td>
+                    <td align="right">
+                        <b>0</b>
+                    </td>
+                    <td align="right">
+                        <b>0</b>
+                    </td>
+                    <td align="right">
+                        <b>0</b>
+                    </td>
+                    <td align="right">
+                        <b>0</b>
+                    </td>
+                      <td align="right">
+                        <b>1</b>
+                    </td>
+                    <td align="right">
+                        <b>0</b>
+                    </td>
+                </tr>
+            
+                </table>
+            

@@ -1,0 +1,426 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Leaflet Map Styles */
+.leaflet-container {
+  width: 100%;
+  height: 100%;
+  min-height: 400px;
+  max-height: 100%;
+  z-index: 1;
+}
+
+/* Leaflet Map Styles */
+.leaflet-container {
+  width: 100%;
+  height: 100%;
+  min-height: 400px;
+  max-height: 100%;
+  z-index: 1;
+}
+
+/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
+All colors MUST be HSL.
+*/
+
+@layer base {
+  :root {
+    /* Calm Forest–Earth–Tribal palette (accessible, low-vibrance) */
+    --background: 30 20% 98%; /* warm paper */
+    --foreground: 150 10% 15%; /* deep earthy text */
+
+    --card: 0 0% 100%;
+    --card-foreground: 150 10% 15%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 150 10% 15%;
+
+    /* Primary: forest green */
+    --primary: 142 35% 23%;
+    --primary-foreground: 0 0% 100%;
+    --primary-hover: 142 28% 28%;
+    --primary-light: 142 35% 95%;
+
+    /* Secondary: muted earthy orange */
+    --secondary: 25 45% 40%;
+    --secondary-foreground: 0 0% 100%;
+    --secondary-hover: 25 45% 35%;
+    --secondary-light: 25 45% 95%;
+
+    /* Muted neutrals */
+    --muted: 30 18% 96%;
+    --muted-foreground: 150 6% 35%;
+
+    /* Accent: leaf green */
+    --accent: 158 35% 38%;
+    --accent-foreground: 0 0% 100%;
+    --accent-light: 158 35% 95%;
+
+    --destructive: 2 65% 48%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 150 10% 85%;
+    --input: 0 0% 100%;
+    --ring: 142 35% 23%;
+
+    /* Dashboard Specific Colors */
+    --dashboard-nav: 150 15% 12%; /* deep green-black */
+    --dashboard-nav-foreground: 0 0% 100%;
+    --dashboard-sidebar: 120 16% 96%; /* soft leaf tint */
+    --dashboard-panel: 0 0% 100%;
+    --map-control: 0 0% 100%;
+    --status-approved: 142 30% 36%;
+    --status-pending: 36 70% 50%;
+    --status-rejected: 2 60% 48%;
+
+    /* Shadows */
+    --shadow-card: 0 4px 6px -1px hsl(0 0% 0% / 0.1), 0 2px 4px -2px hsl(0 0% 0% / 0.1);
+    --shadow-panel: 0 10px 15px -3px hsl(0 0% 0% / 0.1), 0 4px 6px -4px hsl(0 0% 0% / 0.1);
+    --shadow-elevated: 0 20px 25px -5px hsl(0 0% 0% / 0.1), 0 8px 10px -6px hsl(0 0% 0% / 0.1);
+
+    --radius: 0.5rem;
+
+    --sidebar-background: 0 0% 98%;
+    --sidebar-foreground: 0 0% 0%;
+    --sidebar-primary: 0 0% 0%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 0 0% 95%;
+    --sidebar-accent-foreground: 0 0% 0%;
+    --sidebar-border: 0 0% 90%;
+    --sidebar-ring: 0 0% 0%;
+
+    /* Fixed header height for global content offset */
+    --nav-height: 64px;
+  }
+
+  .dark {
+    --background: 0 0% 0%;
+    --foreground: 0 0% 100%;
+
+    --card: 0 0% 10%;
+    --card-foreground: 0 0% 100%;
+
+    --popover: 0 0% 10%;
+    --popover-foreground: 0 0% 100%;
+
+    --primary: 0 0% 100%;
+    --primary-foreground: 0 0% 0%;
+    --primary-hover: 0 0% 80%;
+    --primary-light: 0 0% 20%;
+
+    --secondary: 0 0% 50%;
+    --secondary-foreground: 0 0% 100%;
+    --secondary-hover: 0 0% 60%;
+    --secondary-light: 0 0% 20%;
+
+    --muted: 0 0% 15%;
+    --muted-foreground: 0 0% 65%;
+
+    --accent: 0 0% 70%;
+    --accent-foreground: 0 0% 0%;
+    --accent-light: 0 0% 20%;
+
+    --destructive: 0 0% 100%;
+    --destructive-foreground: 0 0% 0%;
+
+    --border: 0 0% 20%;
+    --input: 0 0% 15%;
+    --ring: 0 0% 100%;
+
+    --dashboard-nav: 0 0% 0%;
+    --dashboard-nav-foreground: 0 0% 100%;
+    --dashboard-sidebar: 0 0% 10%;
+    --dashboard-panel: 0 0% 10%;
+    --map-control: 0 0% 10%;
+    --status-approved: 0 0% 100%;
+    --status-pending: 0 0% 50%;
+    --status-rejected: 0 0% 100%;
+
+    --shadow-card: 0 4px 6px -1px hsl(0 0% 0% / 0.3), 0 2px 4px -2px hsl(0 0% 0% / 0.2);
+    --shadow-panel: 0 10px 15px -3px hsl(0 0% 0% / 0.3), 0 4px 6px -4px hsl(0 0% 0% / 0.2);
+    --shadow-elevated: 0 20px 25px -5px hsl(0 0% 0% / 0.3), 0 8px 10px -6px hsl(0 0% 0% / 0.2);
+    --sidebar-background: 0 0% 10%;
+    --sidebar-foreground: 0 0% 100%;
+    --sidebar-primary: 0 0% 100%;
+    --sidebar-primary-foreground: 0 0% 0%;
+    --sidebar-accent: 0 0% 20%;
+    --sidebar-accent-foreground: 0 0% 100%;
+    --sidebar-border: 0 0% 20%;
+    --sidebar-ring: 0 0% 100%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased;
+    padding-top: var(--nav-height);
+  }
+
+  /* Subtle dark gradient behind the fixed navbar to avoid dull edge */
+  body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: calc(var(--nav-height) + 16px);
+    background: linear-gradient(
+      to bottom,
+      hsl(var(--dashboard-nav)) 0%,
+      hsla(var(--dashboard-nav), 0.85) 60%,
+      rgba(0,0,0,0) 100%
+    );
+    z-index: 40; /* Below header (z-50), above content */
+    pointer-events: none;
+  }
+}
+
+/* Mobile-specific improvements */
+@layer utilities {
+  /* Ensure touch targets are at least 44px */
+  .touch-target {
+    min-height: 44px;
+    min-width: 44px;
+  }
+  
+  /* Mobile-friendly scrolling */
+  .mobile-scroll {
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior: contain;
+  }
+  
+  /* Prevent zoom on input focus on iOS */
+  @media screen and (max-width: 768px) {
+    input[type="text"],
+    input[type="email"],
+    input[type="password"],
+    textarea,
+    select {
+      font-size: 16px;
+    }
+  }
+  
+  /* Mobile drawer improvements */
+  .mobile-drawer {
+    @apply fixed inset-y-0 right-0 z-50 w-full bg-background shadow-elevated transform transition-transform duration-300 ease-in-out;
+  }
+  
+  /* Mobile control panel */
+  .mobile-control-panel {
+    @apply fixed right-0 top-0 h-full w-80 max-w-[85vw] bg-dashboard-sidebar transform transition-transform duration-300 ease-in-out;
+  }
+  
+  /* Text visibility improvements */
+  .text-high-contrast {
+    color: hsl(var(--foreground));
+    font-weight: 500;
+  }
+  
+  /* Mobile navigation text improvements */
+  .mobile-nav-text {
+    color: white;
+    font-weight: 500;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+  }
+  
+  /* Active mobile nav text */
+  .mobile-nav-active {
+    color: hsl(var(--dashboard-nav));
+    font-weight: 600;
+  }
+
+  /* Enhanced Button Styles */
+  .btn-primary {
+    @apply bg-black text-white border-2 border-black font-semibold px-6 py-3 rounded-lg;
+    @apply hover:bg-gray-800 hover:border-gray-800 transition-all duration-200;
+    @apply focus:ring-4 focus:ring-gray-300 focus:outline-none;
+    @apply shadow-lg hover:shadow-xl;
+  }
+
+  .btn-secondary {
+    @apply bg-white text-black border-2 border-black font-semibold px-6 py-3 rounded-lg;
+    @apply hover:bg-gray-100 hover:border-gray-800 transition-all duration-200;
+    @apply focus:ring-4 focus:ring-gray-300 focus:outline-none;
+    @apply shadow-md hover:shadow-lg;
+  }
+
+  .btn-outline {
+    @apply bg-transparent text-black border-2 border-gray-400 font-semibold px-6 py-3 rounded-lg;
+    @apply hover:bg-gray-100 hover:border-gray-600 transition-all duration-200;
+    @apply focus:ring-4 focus:ring-gray-300 focus:outline-none;
+  }
+
+  .btn-ghost {
+    @apply bg-transparent text-gray-600 font-medium px-4 py-2 rounded-lg;
+    @apply hover:bg-gray-100 hover:text-black transition-all duration-200;
+    @apply focus:ring-2 focus:ring-gray-300 focus:outline-none;
+  }
+
+  /* Interactive Elements */
+  .clickable {
+    @apply cursor-pointer transition-all duration-200;
+    @apply hover:scale-105 hover:shadow-md;
+  }
+
+  .card-interactive {
+    @apply border-2 border-gray-200 hover:border-gray-400;
+    @apply transition-all duration-200 hover:shadow-lg;
+    @apply cursor-pointer;
+  }
+
+  /* Status Indicators */
+  .status-approved {
+    @apply bg-green-100 text-green-800 border-green-300;
+  }
+
+  .status-pending {
+    @apply bg-yellow-100 text-yellow-800 border-yellow-300;
+  }
+
+  .status-rejected {
+    @apply bg-red-100 text-red-800 border-red-300;
+  }
+
+  /* Priority Indicators */
+  .priority-high {
+    @apply bg-red-100 text-red-800 border-red-300 font-semibold;
+  }
+
+  .priority-medium {
+    @apply bg-yellow-100 text-yellow-800 border-yellow-300 font-semibold;
+  }
+
+  .priority-low {
+    @apply bg-green-100 text-green-800 border-green-300 font-semibold;
+  }
+
+  /* Enhanced Form Elements */
+  .form-input {
+    @apply border-2 border-gray-300 rounded-lg px-4 py-3;
+    @apply focus:border-black focus:ring-4 focus:ring-gray-200 focus:outline-none;
+    @apply transition-all duration-200;
+  }
+
+  .form-select {
+    @apply border-2 border-gray-300 rounded-lg px-4 py-3;
+    @apply focus:border-black focus:ring-4 focus:ring-gray-200 focus:outline-none;
+    @apply transition-all duration-200;
+  }
+
+  /* Forest Layout Scrolling */
+  .forest-scroll-container {
+    @apply overflow-y-auto;
+    scrollbar-width: thin;
+    scrollbar-color: #cbd5e1 #f1f5f9;
+  }
+  
+  .forest-scroll-container::-webkit-scrollbar {
+    width: 6px;
+  }
+  
+  .forest-scroll-container::-webkit-scrollbar-track {
+    @apply bg-gray-100 rounded;
+  }
+  
+  .forest-scroll-container::-webkit-scrollbar-thumb {
+    @apply bg-gray-300 rounded hover:bg-gray-400;
+  }
+
+  /* Prevent overlapping in forest layout */
+  .forest-layout-container {
+    @apply relative z-0;
+  }
+  
+  .forest-map-container {
+    @apply relative z-10;
+  }
+  
+  .forest-sidebar-container {
+    @apply relative z-20;
+  }
+
+  /* Ensure map fits within viewport at desktop zoom (inc. 110%) */
+  .map-viewport {
+    height: calc(100vh - var(--nav-height) - 24px);
+    max-height: calc(100vh - var(--nav-height) - 24px);
+    overflow: hidden;
+  }
+
+  /* Mobile Responsive Improvements */
+  @media (max-width: 768px) {
+    .btn-primary, .btn-secondary, .btn-outline {
+      @apply px-4 py-2 text-sm;
+    }
+    
+    .card-interactive {
+      @apply border border-gray-200;
+    }
+    
+    /* Mobile text improvements */
+    .mobile-text-sm {
+      @apply text-xs sm:text-sm;
+    }
+    
+    .mobile-text-base {
+      @apply text-sm sm:text-base;
+    }
+    
+    .mobile-text-lg {
+      @apply text-base sm:text-lg;
+    }
+    
+    .mobile-text-xl {
+      @apply text-lg sm:text-xl;
+    }
+    
+    /* Mobile spacing improvements */
+    .mobile-p-2 {
+      @apply p-2 sm:p-4;
+    }
+    
+    .mobile-p-3 {
+      @apply p-3 sm:p-6;
+    }
+    
+    .mobile-mb-2 {
+      @apply mb-2 sm:mb-4;
+    }
+    
+    .mobile-mb-4 {
+      @apply mb-4 sm:mb-6;
+    }
+    
+    /* Mobile break word improvements */
+    .mobile-break-words {
+      @apply break-words;
+    }
+    
+    /* Mobile button improvements */
+    .mobile-btn-full {
+      @apply w-full sm:w-auto;
+    }
+    
+    /* Mobile card improvements */
+    .mobile-card {
+      @apply mx-2 sm:mx-0;
+    }
+    
+    /* Mobile flex improvements */
+    .mobile-flex-col {
+      @apply flex-col sm:flex-row;
+    }
+    
+    .mobile-items-center {
+      @apply items-start sm:items-center;
+    }
+    
+    .mobile-justify-between {
+      @apply justify-start sm:justify-between;
+    }
+  }
+}

@@ -1,0 +1,104 @@
+
+              <table align="center" width="70%" border="1" bordercolor="#EBEBEB" style="border-collapse:collapse " cellspacing="0" >
+                <tr bgcolor="#d2ffd2">
+                <td align="center" rowspan="1"><b>S No.</b></td>
+                 
+               <td align="center" rowspan="1"><b> Registration No.</b></td>
+              <td align="center" rowspan="1" ><b>Head of Household</b></td>
+               <td align="center" rowspan="1"><b>Caste</b></td>
+              <td align="center" rowspan="1" ><b>Family_ID</b></td>
+               <td align="center" rowspan="1" ><b>Extent of land(in acres)</b></td>
+                
+            
+               </tr>
+                
+                </td>
+                </tr>
+                
+                
+                <tr>
+                 <td align="center">1</td>
+                 
+                 <td align="left">OR-21-003-011-004/13081</td>
+                 <td align="left">SURESH NAYAK</td>
+                 <td align="left">ST</td>
+                 <td align="right">13081</td>
+                   <td align="right">0.2</td>
+                
+                   
+                </tr>
+                
+                <tr>
+                 <td align="center">2</td>
+                 
+                 <td align="left">OR-21-003-011-004/13089</td>
+                 <td align="left">GUTIK NAYAK</td>
+                 <td align="left">ST</td>
+                 <td align="right">13089</td>
+                   <td align="right">0.09</td>
+                
+                   
+                </tr>
+                
+                <tr>
+                 <td align="center">3</td>
+                 
+                 <td align="left">OR-21-003-011-004/13100</td>
+                 <td align="left">NABAKISHOR NAYAK</td>
+                 <td align="left">ST</td>
+                 <td align="right">13100</td>
+                   <td align="right">0.35</td>
+                
+                   
+                </tr>
+                
+                <tr>
+                 <td align="center">4</td>
+                 
+                 <td align="left">OR-21-003-011-004/13110</td>
+                 <td align="left">UPENDRA NAYAK</td>
+                 <td align="left">ST</td>
+                 <td align="right">13110</td>
+                   <td align="right">0.09</td>
+                
+                   
+                </tr>
+                
+                <tr>
+                 <td align="center">5</td>
+                 
+                 <td align="left">OR-21-003-011-004/13116</td>
+                 <td align="left">GAYADHAR NAYAK</td>
+                 <td align="left">ST</td>
+                 <td align="right">13116</td>
+                   <td align="right">0.22</td>
+                
+                   
+                </tr>
+                
+                <tr>
+                 <td align="center">6</td>
+                 
+                 <td align="left">OR-21-003-011-004/13124</td>
+                 <td align="left">GANGADHAR NAYAK</td>
+                 <td align="left">ST</td>
+                 <td align="right">13124</td>
+                   <td align="right">0.2</td>
+                
+                   
+                </tr>
+                
+                <tr>
+                 <td align="center">7</td>
+                 
+                 <td align="left">OR-21-003-011-004/13131</td>
+                 <td align="left">CHINTAMANI  NAYAK</td>
+                 <td align="left">ST</td>
+                 <td align="right">13131</td>
+                   <td align="right">0.14</td>
+                
+                   
+                </tr>
+                
+            </table>
+            
