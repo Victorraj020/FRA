@@ -4,13 +4,31 @@ import { useTranslation } from 'react-i18next';
 import { useAuth } from '@/contexts/AuthContext';
 import { Button } from '@/components/ui/button';
 import { useNavigate } from 'react-router-dom';
+import { Megaphone } from 'lucide-react';
+
+const TICKER_MESSAGES = [
+  "New FRA guidelines issued for PVTGs (Particularly Vulnerable Tribal Groups).",
+  "Application processing times have been reduced by 20% across 5 states.",
+  "Scheduled maintenance on Friday, 11:00 PM to 2:00 AM IST.",
+  "Over 10,000 community land rights distributed in Maharashtra this quarter."
+];
 
 const GovHeader: React.FC = () => {
   const { t, i18n } = useTranslation();
   const { currentUser, logout, userRole, userPermissions } = useAuth();
   const [isProfileDropdownOpen, setIsProfileDropdownOpen] = React.useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = React.useState(false);
+  const [highContrast, setHighContrast] = React.useState(false);
   const navigate = useNavigate();
+
+  const toggleHighContrast = () => {
+    setHighContrast(!highContrast);
+    if (!highContrast) {
+      document.documentElement.classList.add('contrast-more', 'grayscale');
+    } else {
+      document.documentElement.classList.remove('contrast-more', 'grayscale');
+    }
+  };
 
   const handleSignIn = () => { navigate('/login'); setIsMobileMenuOpen(false); };
   const handleLogout = async () => {
@@ -91,7 +109,9 @@ const GovHeader: React.FC = () => {
           <span className="hidden sm:block">GOVERNMENT OF INDIA | MINISTRY OF TRIBAL AFFAIRS</span>
           <span className="sm:hidden text-[10px]">GOVT. OF INDIA · MoTA</span>
           <div className="flex items-center gap-2 sm:gap-4">
-            <button className="hover:text-primary transition-colors hidden sm:block">Screen Reader Access</button>
+            <button onClick={toggleHighContrast} className="hover:text-primary transition-colors hidden sm:block">
+              {highContrast ? "Standard View" : "High Contrast"}
+            </button>
             <div className="hidden sm:flex items-center gap-1">
               <button aria-label="A-" className="px-1.5 border rounded text-xs">A-</button>
               <button aria-label="A" className="px-1.5 border rounded text-xs">A</button>
@@ -257,6 +277,31 @@ const GovHeader: React.FC = () => {
           </div>
         </div>
       )}
+
+      <style>{`
+        @keyframes marquee {
+          0% { transform: translateX(10%); }
+          100% { transform: translateX(-100%); }
+        }
+        .animate-marquee { display: inline-flex; animation: marquee 40s linear infinite; white-space: nowrap; }
+        .animate-marquee:hover { animation-play-state: paused; }
+      `}</style>
+
+      {/* Live Ticker Section */}
+      <div className="bg-white border-b border-gray-200 p-2 overflow-hidden flex items-center w-full">
+        <Megaphone className="w-5 h-5 text-gray-500 mr-3 flex-shrink-0 animate-pulse ml-4" />
+        <div className="flex-1 overflow-hidden relative h-6">
+          <div className="absolute animate-marquee space-x-16 cursor-default">
+            {TICKER_MESSAGES.map((msg, idx) => (
+              <span key={idx} className="text-sm text-gray-700 tracking-wide">{msg}</span>
+            ))}
+            {/* Duplicate for seamless infinite scrolling */}
+            {TICKER_MESSAGES.map((msg, idx) => (
+              <span key={`dup-${idx}`} className="text-sm text-gray-700 tracking-wide">{msg}</span>
+            ))}
+          </div>
+        </div>
+      </div>
     </header>
   );
 };

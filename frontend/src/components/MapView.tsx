@@ -6,10 +6,12 @@ import { mockVillages, Village, mockForestAreas, ForestArea } from '@/data/mockD
 import { loadRealForestAreas, loadAngulVillages, type RealVillage, loadDSSVillages, type DSSVillage } from '@/lib/utils';
 import api from '@/services/api';
 import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
 import { useNavigate } from 'react-router-dom';
 import { toast } from '@/components/ui/use-toast';
 import { Card } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
+import { Search, Sparkles, CheckCircle, FileText, MapPin } from 'lucide-react';
 import { ResponsiveContainer, PieChart, Pie, Cell, Tooltip as RTooltip } from 'recharts';
 // GeoJSON will be loaded dynamically
 
@@ -109,7 +111,7 @@ const createForestIcon = (type: string, biodiversity: string) => {
     `,
     className: 'forest-marker',
     iconSize: [size, size],
-    iconAnchor: [size/2, size/2]
+    iconAnchor: [size / 2, size / 2]
   });
 };
 
@@ -131,8 +133,8 @@ interface MapViewProps {
   limitedMode?: boolean;
 }
 
-const MapView: React.FC<MapViewProps> = ({ 
-  onVillageSelect, 
+const MapView: React.FC<MapViewProps> = ({
+  onVillageSelect,
   onForestSelect,
   onStateSelect,
   selectedFilters = { state: 'all-states', district: 'all-districts', status: 'all-status' },
@@ -158,10 +160,24 @@ const MapView: React.FC<MapViewProps> = ({
   const [dssSearch, setDssSearch] = React.useState('');
   const [dssDistricts, setDssDistricts] = React.useState<string[]>([]);
   const [dssDistrict, setDssDistrict] = React.useState('');
-  const [dssPriority, setDssPriority] = React.useState<'low'|'medium'|'high'|''>('');
-  
+  const [dssPriority, setDssPriority] = React.useState<'low' | 'medium' | 'high' | ''>('');
+
+  const [searchQuery, setSearchQuery] = React.useState("");
+  const [isSearching, setIsSearching] = React.useState(false);
+  const [showResults, setShowResults] = React.useState(false);
+
+  const handleQuickSearch = () => {
+    if (!searchQuery.trim()) return;
+    setIsSearching(true);
+    setShowResults(false);
+    setTimeout(() => {
+      setIsSearching(false);
+      setShowResults(true);
+    }, 800);
+  };
+
   // Use real GeoJSON data for state boundaries
-  
+
   const getStatusColor = (status: string) => {
     switch (status) {
       case 'Approved': return 'bg-status-approved';
@@ -185,16 +201,16 @@ const MapView: React.FC<MapViewProps> = ({
   // Add state boundary overlays using real GeoJSON data
   const addStateBoundaries = async () => {
     if (!mapInstanceRef.current) return;
-    
+
     // Clear existing boundaries
     stateBoundariesRef.current.forEach(boundary => boundary.remove());
     stateBoundariesRef.current = [];
-    
+
     try {
       // Load GeoJSON data dynamically
       const response = await fetch('/four_states_india.geojson');
       const geoJsonData = await response.json();
-      
+
       // Add GeoJSON layer with polished red outline styling
       const geoJsonLayer = L.geoJSON(geoJsonData, {
         style: {
@@ -211,13 +227,13 @@ const MapView: React.FC<MapViewProps> = ({
           // Add popup with state name
           const stateName = feature.properties?.NAME_1 || feature.properties?.name || 'State';
           layer.bindPopup(`<div class="text-center"><strong>${stateName}</strong><br/>Click to zoom to state</div>`);
-          
+
           // Add click handler to zoom to state
           layer.on('click', () => {
             zoomToState(stateName);
-            try { onStateSelect && onStateSelect(stateName); } catch {}
+            try { onStateSelect && onStateSelect(stateName); } catch { }
           });
-          
+
           // Store reference for cleanup
           stateBoundariesRef.current.push(layer as L.Polygon);
         }
@@ -232,16 +248,16 @@ const MapView: React.FC<MapViewProps> = ({
   // Add district boundary overlays using real GeoJSON data
   const addDistrictBoundaries = async () => {
     if (!mapInstanceRef.current) return;
-    
+
     // Clear existing district boundaries
     districtBoundariesRef.current.forEach(boundary => boundary.remove());
     districtBoundariesRef.current = [];
-    
+
     try {
       // Load district GeoJSON data dynamically
       const response = await fetch('/four_states_districts.geojson');
       const geoJsonData = await response.json();
-      
+
       // Add GeoJSON layer with refined outline styling for districts
       const geoJsonLayer = L.geoJSON(geoJsonData, {
         style: {
@@ -259,12 +275,12 @@ const MapView: React.FC<MapViewProps> = ({
           const districtName = feature.properties?.NAME_2 || 'District';
           const stateName = feature.properties?.NAME_1 || 'State';
           layer.bindPopup(`<div class="text-center"><strong>${districtName}</strong><br/>${stateName}<br/>Click to zoom to district</div>`);
-          
+
           // Add click handler to zoom to district
           layer.on('click', () => {
             zoomToDistrict(districtName, stateName);
           });
-          
+
           // Store reference for cleanup and feature data
           (layer as any).feature = feature;
           // Also attach a lowercase name index for robust matching
@@ -283,14 +299,14 @@ const MapView: React.FC<MapViewProps> = ({
   // Function to zoom to a specific state
   const zoomToState = (stateName: string) => {
     if (!mapInstanceRef.current) return;
-    
+
     const stateBounds = {
       'Madhya Pradesh': [[21.0, 74.0], [26.0, 82.0]] as L.LatLngBoundsExpression,
       'Odisha': [[17.5, 81.5], [22.5, 87.5]] as L.LatLngBoundsExpression,
       'Telangana': [[15.5, 77.0], [19.5, 81.0]] as L.LatLngBoundsExpression,
       'Tripura': [[22.5, 91.0], [24.5, 92.5]] as L.LatLngBoundsExpression
     };
-    
+
     const bounds = stateBounds[stateName as keyof typeof stateBounds];
     if (bounds) {
       mapInstanceRef.current.fitBounds(bounds, { padding: [20, 20] });
@@ -300,15 +316,15 @@ const MapView: React.FC<MapViewProps> = ({
   // Function to zoom to a specific district
   const zoomToDistrict = (districtName: string, stateName: string) => {
     if (!mapInstanceRef.current) return;
-    
+
     // Find the district boundary and zoom to it
     const districtLayer = districtBoundariesRef.current.find(layer => {
       const feature = (layer as any).feature;
-      return feature && feature.properties && 
-             feature.properties.NAME_2 === districtName && 
-             feature.properties.NAME_1 === stateName;
+      return feature && feature.properties &&
+        feature.properties.NAME_2 === districtName &&
+        feature.properties.NAME_1 === stateName;
     });
-    
+
     if (districtLayer) {
       const bounds = (districtLayer as L.Polygon).getBounds();
       mapInstanceRef.current.fitBounds(bounds, { padding: [10, 10] });
@@ -318,10 +334,10 @@ const MapView: React.FC<MapViewProps> = ({
   // Fallback function with simplified boundaries
   const addFallbackBoundaries = () => {
     if (!mapInstanceRef.current) return;
-    
+
     const fallbackStates = {
       'Madhya Pradesh': [
-        [24.0, 74.0], [24.0, 82.0], [22.0, 82.0], [22.0, 80.0], [21.0, 80.0], 
+        [24.0, 74.0], [24.0, 82.0], [22.0, 82.0], [22.0, 80.0], [21.0, 80.0],
         [21.0, 78.0], [22.0, 78.0], [22.0, 76.0], [23.0, 76.0], [23.0, 74.0], [24.0, 74.0]
       ] as L.LatLngExpression[],
       'Odisha': [
@@ -334,7 +350,7 @@ const MapView: React.FC<MapViewProps> = ({
         [24.5, 91.0], [24.5, 92.5], [22.5, 92.5], [22.5, 91.0], [24.5, 91.0]
       ] as L.LatLngExpression[]
     };
-    
+
     Object.entries(fallbackStates).forEach(([stateName, coordinates]) => {
       const polygon = L.polygon(coordinates, {
         color: '#dc2626',
@@ -346,14 +362,14 @@ const MapView: React.FC<MapViewProps> = ({
         lineJoin: 'round',
         lineCap: 'round'
       }).addTo(mapInstanceRef.current!);
-      
+
       polygon.bindPopup(`<div class="text-center"><strong>${stateName}</strong><br/>Click to zoom to state</div>`);
-      
+
       // Add click handler to zoom to state
       polygon.on('click', () => {
         zoomToState(stateName);
       });
-      
+
       stateBoundariesRef.current.push(polygon);
     });
   };
@@ -364,12 +380,12 @@ const MapView: React.FC<MapViewProps> = ({
       // Create map instance
       const map = L.map(mapRef.current).setView([21.0, 81.0], 6);
       mapInstanceRef.current = map;
-      
+
       // Add satellite imagery basemap (different map style)
       L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
         attribution: 'Imagery &copy; Esri, Maxar, Earthstar Geographics, and the GIS User Community'
       }).addTo(map);
-      
+
       // Add state and district boundaries after map is initialized
       setTimeout(() => {
         addStateBoundaries();
@@ -381,7 +397,7 @@ const MapView: React.FC<MapViewProps> = ({
       dssVillagesRef.current = null;
       realVillagesRef.current = null;
     }
-    
+
     // Force a resize after a short delay to ensure proper rendering
     setTimeout(() => {
       if (mapInstanceRef.current) {
@@ -399,14 +415,14 @@ const MapView: React.FC<MapViewProps> = ({
     };
 
     window.addEventListener('resize', handleResize);
-    
+
     // Cleanup function
     return () => {
       window.removeEventListener('resize', handleResize);
       // Clear village markers
       markersRef.current.forEach(marker => marker.remove());
       markersRef.current = [];
-      
+
       // Clear forest markers
       forestMarkersRef.current.forEach(marker => marker.remove());
       forestMarkersRef.current = [];
@@ -414,15 +430,15 @@ const MapView: React.FC<MapViewProps> = ({
       // Clear water level markers
       waterMarkersRef.current.forEach(marker => marker.remove());
       waterMarkersRef.current = [];
-      
+
       // Clear state boundaries
       stateBoundariesRef.current.forEach(boundary => boundary.remove());
       stateBoundariesRef.current = [];
-      
+
       // Clear district boundaries
       districtBoundariesRef.current.forEach(boundary => boundary.remove());
       districtBoundariesRef.current = [];
-      
+
       if (mapInstanceRef.current) {
         mapInstanceRef.current.remove();
         mapInstanceRef.current = null;
@@ -478,7 +494,7 @@ const MapView: React.FC<MapViewProps> = ({
           geojson = await res.json();
         }
         // Load districts list for filters
-        api.dss.getDistricts().then((arr) => setDssDistricts(arr || [])).catch(() => {});
+        api.dss.getDistricts().then((arr) => setDssDistricts(arr || [])).catch(() => { });
         if (!mapInstanceRef.current) return;
         // Remove old layer
         if (dssLayerRef.current) {
@@ -518,7 +534,7 @@ const MapView: React.FC<MapViewProps> = ({
                   <div>👥 FRA Holders: ${p.fra_beneficiary_count}</div>
                   <div>🌾 PM-Kisan Beneficiaries: ${p.pm_kisan_count}</div>
                   <div>🚰 JJM Coverage: ${p.jjm_coverage_pct}%</div>
-                  <div>💧 Water Stress: ${(Number(p.water_stress_score||0)).toFixed(2)}</div>
+                  <div>💧 Water Stress: ${(Number(p.water_stress_score || 0)).toFixed(2)}</div>
                   <div>📊 DSS Suggestion: ${recs[0] || '—'}</div>
                 </div>
                 <button data-view-details="${p.village_code}" class="mt-2 w-full bg-blue-600 text-white px-2 py-1 rounded">View Details</button>
@@ -533,12 +549,12 @@ const MapView: React.FC<MapViewProps> = ({
                     window.location.href = `/village/${p.village_code}`;
                   }, { once: true });
                 }
-              } catch {}
+              } catch { }
             });
             layer.on('click', async () => {
               try {
                 window.location.href = `/village/${p.village_code}`;
-              } catch {}
+              } catch { }
             });
           }
         }).addTo(mapInstanceRef.current);
@@ -600,15 +616,15 @@ const MapView: React.FC<MapViewProps> = ({
                   <div>👥 FRA: ${p.fra_beneficiary_count ?? '—'}</div>
                   <div>🌾 PM-Kisan: ${p.pm_kisan_count ?? '—'}</div>
                   <div>🚰 JJM: ${p.jjm_coverage_pct ?? '—'}%</div>
-                  <div>💧 Water Stress: ${(Number(p.water_stress_score||0)).toFixed(2)}</div>
+                  <div>💧 Water Stress: ${(Number(p.water_stress_score || 0)).toFixed(2)}</div>
                 </div>
                 <div class=\"mt-1 text-xs\">📊 Suggestion: ${recs[0] || '—'}</div>
               </div>`;
             layer.bindTooltip(summary, { sticky: false, direction: 'top', opacity: 0.95 });
-            layer.on('click', () => { try { window.location.href = `/village/${p.village_code}`; } catch {} });
+            layer.on('click', () => { try { window.location.href = `/village/${p.village_code}`; } catch { } });
           }
         }).addTo(mapInstanceRef.current);
-      } catch {}
+      } catch { }
     }, 300);
     return () => clearTimeout(id);
   }, [dssSearch, dssDistrict, dssPriority]);
@@ -616,11 +632,11 @@ const MapView: React.FC<MapViewProps> = ({
   // Update markers when filters change
   useEffect(() => {
     if (!mapInstanceRef.current) return;
-    
+
     // Zoom behavior based on selected filters
     try {
       if (selectedFilters.district && selectedFilters.district !== 'all-districts' &&
-          selectedFilters.state && selectedFilters.state !== 'all-states') {
+        selectedFilters.state && selectedFilters.state !== 'all-states') {
         // Zoom to selected district within the selected state
         zoomToDistrict(selectedFilters.district, selectedFilters.state);
       } else if (selectedFilters.state && selectedFilters.state !== 'all-states') {
@@ -633,15 +649,15 @@ const MapView: React.FC<MapViewProps> = ({
     } catch (e) {
       // no-op if layers not yet ready; they load shortly after mount
     }
-    
+
     // Clear existing village markers
     markersRef.current.forEach(marker => marker.remove());
     markersRef.current = [];
-    
+
     // Clear existing forest markers
     forestMarkersRef.current.forEach(marker => marker.remove());
     forestMarkersRef.current = [];
-    
+
     // Add markers for filtered villages (only if FRA mode is enabled)
     if (mapMode === 'both' || mapMode === 'fra') {
       const filteredVillages = getFilteredVillages();
@@ -650,14 +666,14 @@ const MapView: React.FC<MapViewProps> = ({
           icon: createMarkerIcon(village.status, village.fraType)
         }).addTo(mapInstanceRef.current!);
         markersRef.current.push(marker);
-      
-      // Create popup content (include DSS recommendations if available)
-      const popupContent = document.createElement('div');
-      popupContent.className = 'p-3 min-w-[200px] sm:min-w-[240px] lg:min-w-[280px]';
-      // In limited mode, hide some sensitive fields (land area)
-      const dssVillage = dssVillagesRef.current && dssVillagesRef.current.find(d => d.id === village.id);
-      const recs = dssVillage && Array.isArray(dssVillage.recommendations) ? dssVillage.recommendations.slice(0, 3) : [];
-      popupContent.innerHTML = `
+
+        // Create popup content (include DSS recommendations if available)
+        const popupContent = document.createElement('div');
+        popupContent.className = 'p-3 min-w-[200px] sm:min-w-[240px] lg:min-w-[280px]';
+        // In limited mode, hide some sensitive fields (land area)
+        const dssVillage = dssVillagesRef.current && dssVillagesRef.current.find(d => d.id === village.id);
+        const recs = dssVillage && Array.isArray(dssVillage.recommendations) ? dssVillage.recommendations.slice(0, 3) : [];
+        popupContent.innerHTML = `
         <div class="space-y-3">
           <div class="flex items-center justify-between gap-2">
             <h3 class="font-semibold text-sm sm:text-lg leading-tight">${village.name}</h3>
@@ -694,39 +710,39 @@ const MapView: React.FC<MapViewProps> = ({
           </div>` : ''}
         </div>
       `;
-      
-      // Add button to popup
-      const button = document.createElement('button');
-      button.className = 'w-full text-white py-1 px-3 rounded-md text-sm mt-3';
-      button.style.background = 'var(--lang-accent)';
-      button.textContent = limitedMode ? t('map.viewMore') : t('map.viewDetails');
-      button.onclick = () => {
-        if (limitedMode) {
-          // Prompt login and redirect instead of opening details
-          try {
-            toast({
-              title: t('map.loginRequiredTitle'),
-              description: t('map.loginRequiredDesc'),
-            });
-          } catch (e) {
-            // noop if toast system not ready
+
+        // Add button to popup
+        const button = document.createElement('button');
+        button.className = 'w-full text-white py-1 px-3 rounded-md text-sm mt-3';
+        button.style.background = 'var(--lang-accent)';
+        button.textContent = limitedMode ? t('map.viewMore') : t('map.viewDetails');
+        button.onclick = () => {
+          if (limitedMode) {
+            // Prompt login and redirect instead of opening details
+            try {
+              toast({
+                title: t('map.loginRequiredTitle'),
+                description: t('map.loginRequiredDesc'),
+              });
+            } catch (e) {
+              // noop if toast system not ready
+            }
+            setTimeout(() => {
+              window.location.href = '/login';
+            }, 300);
+            return;
           }
-          setTimeout(() => {
-            window.location.href = '/login';
-          }, 300);
-          return;
-        }
-        onVillageSelect(village);
-      };
-      popupContent.appendChild(button);
-      
-      // Bind popup to marker
-      marker.bindPopup(popupContent);
-      
-      // Add click handler
-      marker.on('click', () => {
-        marker.openPopup();
-      });
+          onVillageSelect(village);
+        };
+        popupContent.appendChild(button);
+
+        // Bind popup to marker
+        marker.bindPopup(popupContent);
+
+        // Add click handler
+        marker.on('click', () => {
+          marker.openPopup();
+        });
       });
     }
 
@@ -754,199 +770,123 @@ const MapView: React.FC<MapViewProps> = ({
   };
 
   return (
-    <div className={`h-full relative bg-card rounded-lg overflow-hidden shadow-card map-viewport ${getBorderStyle()}`} style={{...mapContainerStyle, display: 'block', height: '100%', minHeight: '400px'}}>
-      <div 
+    <div className={`h-full relative bg-card rounded-lg overflow-hidden shadow-card map-viewport ${getBorderStyle()}`} style={{ ...mapContainerStyle, display: 'block', height: '100%', minHeight: '400px' }}>
+      <div
         ref={mapRef}
         style={{ height: '100%', width: '100%', position: 'absolute', top: 0, left: 0 }}
         className="h-full w-full z-10"
       />
-      
-      {/* Map Legend - Responsive */}
-      <div className="absolute top-2 left-2 sm:top-4 sm:left-4 bg-card p-2 sm:p-3 lg:p-4 rounded-lg shadow-card z-[1000] max-w-[200px] sm:max-w-xs">
-        <h4 className="font-semibold mb-2 text-xs sm:text-sm">{t('map.legend')}</h4>
-        <div className="space-y-1 sm:space-y-2">
-          {/* FRA Claims Legend - only show if FRA mode is enabled */}
-          {(mapMode === 'both' || mapMode === 'fra') && [
-            { status: t('status.approved'), color: '#22c55e' },
-            { status: t('status.pending'), color: '#f59e0b' },
-            { status: t('status.rejected'), color: '#ef4444' }
-          ].map(({ status, color }) => (
-            <div key={status} className="flex items-center space-x-1 sm:space-x-2 text-xs">
-              <div 
-                className="w-2 h-2 sm:w-3 sm:h-3 rounded-full border border-white shadow-sm flex-shrink-0"
-                style={{ backgroundColor: color }}
-              />
-              <span className="text-xs truncate">{status}</span>
-            </div>
-          ))}
-          
-          {/* Forest Markers Legend - only show if forest mode is enabled */}
-          {showForests && (mapMode === 'both' || mapMode === 'forests') && (
-            <>
-              <div className="flex items-center space-x-1 sm:space-x-2 text-xs mt-2 pt-2 border-t border-gray-200">
-                <div className="w-2 h-2 sm:w-3 sm:h-3 rounded-full bg-emerald-500 flex items-center justify-center text-white text-xs flex-shrink-0">🌲</div>
-                <span className="text-xs">{t('map.forestAreas')}</span>
-              </div>
-              <div className="text-xs text-gray-600 ml-3 sm:ml-5">
-                <div>• {t('map.biodiversity.high')}</div>
-                <div>• {t('map.biodiversity.medium')}</div>
-                <div>• {t('map.biodiversity.low')}</div>
-              </div>
-            </>
-          )}
-          
-          {/* State Boundaries Legend */}
-          <div className="flex items-center space-x-1 sm:space-x-2 text-xs mt-2 pt-2 border-t border-gray-200">
-            <div 
-              className="w-3 h-1 sm:w-4 sm:h-1 border-2 border-red-600 flex-shrink-0"
-              style={{ 
-                background: 'repeating-linear-gradient(to right, #dc2626 0px, #dc2626 3px, transparent 3px, transparent 6px)'
-              }}
-            />
-            <span className="text-xs">{t('map.stateBoundaries')}</span>
-          </div>
-          
-          {/* District Boundaries Legend */}
-          <div className="flex items-center space-x-1 sm:space-x-2 text-xs mt-1">
-            <div 
-              className="w-3 h-1 sm:w-4 sm:h-1 border border-emerald-500 flex-shrink-0"
-              style={{ 
-                background: 'repeating-linear-gradient(to right, #10b981 0px, #10b981 2px, transparent 2px, transparent 4px)'
-              }}
-            />
-            <span className="text-xs">{t('map.districtBoundaries')}</span>
-          </div>
 
-          {/* Water Level Legend */}
-          <div className="flex items-center space-x-1 sm:space-x-2 text-xs mt-2 pt-2 border-t border-gray-200">
-            <div className="w-3 h-3 sm:w-4 sm:h-4 rounded-full" style={{ backgroundColor: '#0ea5e9' }} />
-            <span className="text-xs">{t('map.waterLevel')}</span>
-          </div>
-          <div className="grid grid-cols-4 gap-1 ml-3 sm:ml-5 text-[10px] text-gray-600">
-            <div className="flex items-center space-x-1">
-              <div className="w-3 h-3 rounded-full" style={{ backgroundColor: '#0ea5e9' }} />
-              <span>≤5</span>
-            </div>
-            <div className="flex items-center space-x-1">
-              <div className="w-3 h-3 rounded-full" style={{ backgroundColor: '#0284c7' }} />
-              <span>≤10</span>
-            </div>
-            <div className="flex items-center space-x-1">
-              <div className="w-3 h-3 rounded-full" style={{ backgroundColor: '#0369a1' }} />
-              <span>≤20</span>
-            </div>
-            <div className="flex items-center space-x-1">
-              <div className="w-3 h-3 rounded-full" style={{ backgroundColor: '#075985' }} />
-              <span>20+</span>
-            </div>
-          </div>
-        </div>
-      </div>
+      {/* Right-Side Control Panel */}
+      <div className="absolute top-4 right-4 z-[1000] flex flex-col items-end gap-3 max-w-[320px] sm:max-w-[360px] w-full max-h-[calc(100%-32px)] overflow-y-auto scrollbar-hide pointer-events-none *:pointer-events-auto">
 
-      {/* DSS Priority Legend */}
-      <div className="absolute top-2 right-2 sm:top-4 sm:right-4 bg-card p-2 sm:p-3 rounded-lg shadow-card z-[1000]">
-        <div className="text-xs font-semibold mb-1">DSS Priority</div>
-        {[{label:'Low (0–49)',color:'#22c55e'},{label:'Medium (50–74)',color:'#f59e0b'},{label:'High (75–100)',color:'#ef4444'}].map((it) => (
-          <div key={it.label} className="flex items-center gap-2 text-xs">
-            <div className="w-3 h-3 rounded-sm" style={{ backgroundColor: it.color }} />
-            <span>{it.label}</span>
-          </div>
-        ))}
-      </div>
+        {/* Grid for Insights & Legend */}
+        <div className="w-full grid grid-cols-2 gap-3 items-start">
 
-      {/* DSS Search & Filters */}
-      <div className="absolute top-2 left-1/2 -translate-x-1/2 sm:top-4 bg-card p-2 sm:p-3 rounded-lg shadow-card z-[1000] w-[92%] sm:w-auto">
-        <div className="flex flex-col sm:flex-row gap-2 items-stretch sm:items-end">
-          <div className="flex-1">
-            <label className="text-[10px] text-muted-foreground">Search village</label>
-            <input value={dssSearch} onChange={(e) => setDssSearch(e.target.value)} placeholder="Type village name…" className="w-full border rounded px-2 py-1 text-sm" />
-          </div>
-          <div>
-            <label className="text-[10px] text-muted-foreground">District</label>
-            <select value={dssDistrict} onChange={(e) => setDssDistrict(e.target.value)} className="border rounded px-2 py-1 text-sm min-w-[160px]">
-              <option value="">All districts</option>
-              {dssDistricts.map((d) => <option key={d} value={d}>{d}</option>)}
-            </select>
-          </div>
-          <div>
-            <label className="text-[10px] text-muted-foreground">Priority</label>
-            <select value={dssPriority} onChange={(e) => setDssPriority(e.target.value as any)} className="border rounded px-2 py-1 text-sm">
-              <option value="">All</option>
-              <option value="low">Low</option>
-              <option value="medium">Medium</option>
-              <option value="high">High</option>
-            </select>
-          </div>
-        </div>
-      </div>
+          {/* Map Legend */}
+          <div className="bg-card/95 backdrop-blur p-3 rounded-xl border border-border shadow-card h-full">
+            <h4 className="font-semibold mb-2 text-xs flex items-center"><MapPin className="w-3.5 h-3.5 mr-1 text-primary" /> {t('map.legend')}</h4>
+            <div className="space-y-2">
+              {(mapMode === 'both' || mapMode === 'fra') && [
+                { status: t('status.approved'), color: '#22c55e' },
+                { status: t('status.pending'), color: '#f59e0b' },
+                { status: t('status.rejected'), color: '#ef4444' }
+              ].map(({ status, color }) => (
+                <div key={status} className="flex items-center space-x-2 text-[11px] tracking-tight text-gray-600">
+                  <div className="w-2.5 h-2.5 rounded-full shadow-sm flex-shrink-0" style={{ backgroundColor: color }} />
+                  <span className="truncate">{status}</span>
+                </div>
+              ))}
 
-      {/* Mini analytics overlay */}
-      {(() => {
-        const villages = getFilteredVillages();
-        const approved = villages.filter(v => v.status === 'Approved').length;
-        const pending = villages.filter(v => v.status === 'Pending').length;
-        const rejected = villages.filter(v => v.status === 'Rejected').length;
-        const data = [
-          { name: 'Approved', value: approved, color: '#22c55e' },
-          { name: 'Pending', value: pending, color: '#f59e0b' },
-          { name: 'Rejected', value: rejected, color: '#ef4444' },
-        ];
-        return (
-          <div className="absolute bottom-2 right-2 sm:bottom-4 sm:right-4 bg-white/95 backdrop-blur rounded-lg shadow-card p-3 z-[1000] w-[180px]">
-            <div className="text-xs font-semibold mb-2">Current Selection</div>
-            <div className="grid grid-cols-3 gap-2 text-[10px] mb-2">
-              <div className="text-center">
-                <div className="font-bold text-green-600">{approved}</div>
-                <div>Approved</div>
-              </div>
-              <div className="text-center">
-                <div className="font-bold text-amber-600">{pending}</div>
-                <div>Pending</div>
-              </div>
-              <div className="text-center">
-                <div className="font-bold text-red-600">{rejected}</div>
-                <div>Rejected</div>
+              {/* State Boundaries Legend */}
+              <div className="flex items-center space-x-2 text-[11px] mt-2 pt-2 border-t border-gray-100 tracking-tight text-gray-600">
+                <div className="w-3 h-1 border-2 border-red-600 flex-shrink-0" style={{ background: 'repeating-linear-gradient(to right, #dc2626 0px, #dc2626 3px, transparent 3px, transparent 6px)' }} />
+                <span className="truncate">{t('map.stateBoundaries')}</span>
               </div>
             </div>
-            <div className="h-24">
-              <ResponsiveContainer width="100%" height="100%">
-                <PieChart>
-                  <Pie data={data} dataKey="value" nameKey="name" innerRadius={24} outerRadius={38} paddingAngle={2}>
-                    {data.map((entry, i) => (
-                      <Cell key={`cell-${i}`} fill={entry.color} />
-                    ))}
-                  </Pie>
-                  <RTooltip formatter={(v: any, n: any) => [`${v}`, n]} />
-                </PieChart>
-              </ResponsiveContainer>
-            </div>
           </div>
-        );
-      })()}
 
-      {/* Insights panel to utilize right-side whitespace on wide screens */}
-      {(() => {
-        const villages = getFilteredVillages();
-        const byState: Record<string, number> = {};
-        villages.forEach(v => { byState[v.state] = (byState[v.state] || 0) + 1; });
-        const topStates = Object.entries(byState)
-          .sort((a,b) => b[1]-a[1])
-          .slice(0, 5);
-        if (!topStates.length) return null;
-        return (
-          <div className="hidden xl:block absolute top-2 right-48 bg-white/95 backdrop-blur rounded-lg shadow-card p-3 z-[900] w-[220px] max-h-[260px] overflow-auto">
-            <div className="text-xs font-semibold mb-2">Insights</div>
-            <div className="text-[11px] space-y-2">
-              {topStates.map(([state,count]) => (
-                <div key={state} className="flex items-center justify-between">
-                  <span className="truncate pr-2">{state}</span>
-                  <span className="font-semibold">{count}</span>
+          <div className="flex flex-col gap-3 h-full">
+            {/* DSS Priority Legend */}
+            <div className="bg-card/95 backdrop-blur p-3 rounded-xl border border-border shadow-card">
+              <div className="text-[11px] font-semibold mb-2">DSS Priority</div>
+              {[{ label: 'Low (0-49)', color: '#22c55e' }, { label: 'Medium (50-74)', color: '#f59e0b' }, { label: 'High (75+)', color: '#ef4444' }].map((it) => (
+                <div key={it.label} className="flex items-center gap-1.5 text-[11px] mb-1.5 tracking-tight text-gray-600 last:mb-0">
+                  <div className="w-2.5 h-2.5 rounded-sm flex-shrink-0" style={{ backgroundColor: it.color }} />
+                  <span>{it.label}</span>
                 </div>
               ))}
             </div>
+
+            {/* Insights panel */}
+            {(() => {
+              const villages = getFilteredVillages();
+              const byState: Record<string, number> = {};
+              villages.forEach(v => { byState[v.state] = (byState[v.state] || 0) + 1; });
+              const topStates = Object.entries(byState).sort((a, b) => b[1] - a[1]).slice(0, 3);
+              if (!topStates.length) return null;
+              return (
+                <div className="bg-card/95 backdrop-blur p-3 rounded-xl border border-border shadow-card max-h-[140px] overflow-auto">
+                  <div className="text-[11px] font-semibold mb-2">Top Insights</div>
+                  <div className="text-[11px] space-y-1.5">
+                    {topStates.map(([state, count]) => (
+                      <div key={state} className="flex items-center justify-between">
+                        <span className="truncate pr-1 text-gray-500">{state}</span>
+                        <span className="font-semibold text-gray-700 bg-gray-100 px-1.5 py-0.5 rounded">{count}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              );
+            })()}
           </div>
-        );
-      })()}
+        </div>
+
+        {/* Current Selection / Mini Analytics */}
+        {(() => {
+          const villages = getFilteredVillages();
+          const approved = villages.filter(v => v.status === 'Approved').length;
+          const pending = villages.filter(v => v.status === 'Pending').length;
+          const rejected = villages.filter(v => v.status === 'Rejected').length;
+          const data = [
+            { name: 'Approved', value: approved, color: '#22c55e' },
+            { name: 'Pending', value: pending, color: '#f59e0b' },
+            { name: 'Rejected', value: rejected, color: '#ef4444' },
+          ];
+          return (
+            <div className="w-full bg-card/95 backdrop-blur rounded-xl border border-border shadow-card p-3">
+              <div className="text-[11px] font-semibold mb-2">Current Selection Analytics</div>
+              <div className="grid grid-cols-3 gap-2 text-[10px] mb-2">
+                <div className="text-center bg-green-50/80 rounded py-1.5 px-1 border border-green-100">
+                  <div className="font-bold text-green-600 text-sm">{approved}</div>
+                  <div className="text-green-800/70">Approved</div>
+                </div>
+                <div className="text-center bg-amber-50/80 rounded py-1.5 px-1 border border-amber-100">
+                  <div className="font-bold text-amber-600 text-sm">{pending}</div>
+                  <div className="text-amber-800/70">Pending</div>
+                </div>
+                <div className="text-center bg-red-50/80 rounded py-1.5 px-1 border border-red-100">
+                  <div className="font-bold text-red-600 text-sm">{rejected}</div>
+                  <div className="text-red-800/70">Rejected</div>
+                </div>
+              </div>
+              <div className="h-[88px] flex justify-center mt-2 border-t border-gray-100 pt-3 relative">
+                <ResponsiveContainer width="100%" height="100%">
+                  <PieChart>
+                    <Pie data={data} dataKey="value" nameKey="name" innerRadius={22} outerRadius={36} paddingAngle={3}>
+                      {data.map((entry, i) => (
+                        <Cell key={`cell-${i}`} fill={entry.color} strokeWidth={0} />
+                      ))}
+                    </Pie>
+                    <RTooltip formatter={(v: any, n: any) => [`${v}`, n]} contentStyle={{ fontSize: '11px', padding: '4px 8px', borderRadius: '8px', border: 'none', boxShadow: '0 4px 6px -1px rgb(0 0 0 / 0.1)' }} />
+                  </PieChart>
+                </ResponsiveContainer>
+              </div>
+            </div>
+          );
+        })()}
+
+      </div>
     </div>
   );
 };

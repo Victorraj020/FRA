@@ -10,12 +10,12 @@ import ContactSection from '@/components/ContactSection';
 import FRAApplicationForm from '@/components/FRAApplicationForm';
 import FRAApplicationList from '@/components/FRAApplicationList';
 import RoleSpecificDashboard from '@/components/RoleSpecificDashboard';
-import { 
-  MapPin, 
-  FileText, 
-  BarChart3, 
-  LogOut, 
-  User, 
+import {
+  MapPin,
+  FileText,
+  BarChart3,
+  LogOut,
+  User,
   Users,
   Grid3X3,
   AlertTriangle,
@@ -171,7 +171,7 @@ const LocalDashboard: React.FC = () => {
   React.useEffect(() => {
     const params = new URLSearchParams(location.search);
     const tabParam = params.get('tab');
-    if (tabParam && ['dashboard','map','alerts','complaints','fra-applications','role-dashboard','analytics'].includes(tabParam)) {
+    if (tabParam && ['dashboard', 'map', 'alerts', 'complaints', 'fra-applications', 'role-dashboard', 'analytics'].includes(tabParam)) {
       setActiveTab(tabParam);
     }
   }, [location.search]);
@@ -201,10 +201,10 @@ const LocalDashboard: React.FC = () => {
       console.log('LocalDashboard: Starting logout process...');
       await logout();
       console.log('LocalDashboard: Logout completed');
-      
+
       // Force redirect immediately
       window.location.href = '/';
-      
+
     } catch (error) {
       console.error('LocalDashboard: Failed to log out:', error);
       window.location.href = '/';
@@ -244,14 +244,14 @@ const LocalDashboard: React.FC = () => {
   };
 
   const handleStatusChangeFRAApplication = (applicationId: string, status: FRAApplication['status'], notes?: string) => {
-    setFraApplications(fraApplications.map(app => 
-      app.id === applicationId 
-        ? { 
-            ...app, 
-            status, 
-            reviewNotes: notes,
-            reviewedBy: currentUser?.displayName || 'System'
-          }
+    setFraApplications(fraApplications.map(app =>
+      app.id === applicationId
+        ? {
+          ...app,
+          status,
+          reviewNotes: notes,
+          reviewedBy: currentUser?.displayName || 'System'
+        }
         : app
     ));
   };
@@ -324,7 +324,7 @@ const LocalDashboard: React.FC = () => {
                     <X className="h-4 w-4" />
                   </Button>
                 </div>
-                <ControlPanel 
+                <ControlPanel
                   selectedFilters={filters}
                   onFilterChange={setFilters}
                   isMobile={true}
@@ -363,7 +363,7 @@ const LocalDashboard: React.FC = () => {
                 </div>
               </div>
             </div>
-            
+
             {/* Map or Forest Content */}
             <div className="flex-1" style={{ minHeight: 'calc(100vh - var(--nav-height))' }}>
               {!selectedForest ? (
@@ -390,7 +390,7 @@ const LocalDashboard: React.FC = () => {
               <h2 className="text-2xl font-bold text-foreground mb-2">FRA Implementation Status</h2>
               <p className="text-muted-foreground">Status on implementation of FRA in Odisha as on 31-12-2024</p>
             </div>
-            
+
             {/* FRA Data Grid */}
             <div className="bg-gradient-to-br from-amber-50 to-yellow-100 rounded-lg p-6 shadow-lg border border-amber-200">
               <div className="overflow-x-auto">
@@ -500,7 +500,7 @@ const LocalDashboard: React.FC = () => {
                 <h2 className="text-2xl font-bold text-foreground mb-2">My Complaints</h2>
                 <p className="text-muted-foreground">Track your submitted complaints and issues</p>
               </div>
-              <Button 
+              <Button
                 onClick={() => setShowComplaintForm(true)}
                 className="btn-primary w-full sm:w-auto"
               >
@@ -508,7 +508,7 @@ const LocalDashboard: React.FC = () => {
                 Submit New Complaint
               </Button>
             </div>
-            
+
             {/* Complaint Form Modal */}
             {showComplaintForm && (
               <Card className="mb-6 border-2">
@@ -524,7 +524,7 @@ const LocalDashboard: React.FC = () => {
                     <input
                       type="text"
                       value={complaintForm.village}
-                      onChange={(e) => setComplaintForm({...complaintForm, village: e.target.value})}
+                      onChange={(e) => setComplaintForm({ ...complaintForm, village: e.target.value })}
                       className="w-full mt-1 p-2 border border-gray-300 rounded-md"
                       placeholder="Enter village name"
                     />
@@ -534,7 +534,7 @@ const LocalDashboard: React.FC = () => {
                     <input
                       type="text"
                       value={complaintForm.issue}
-                      onChange={(e) => setComplaintForm({...complaintForm, issue: e.target.value})}
+                      onChange={(e) => setComplaintForm({ ...complaintForm, issue: e.target.value })}
                       className="w-full mt-1 p-2 border border-gray-300 rounded-md"
                       placeholder="Brief description of the issue"
                     />
@@ -543,7 +543,7 @@ const LocalDashboard: React.FC = () => {
                     <label className="text-sm font-medium text-foreground">Detailed Description</label>
                     <textarea
                       value={complaintForm.description}
-                      onChange={(e) => setComplaintForm({...complaintForm, description: e.target.value})}
+                      onChange={(e) => setComplaintForm({ ...complaintForm, description: e.target.value })}
                       className="w-full mt-1 p-2 border border-gray-300 rounded-md h-24"
                       placeholder="Provide detailed information about the issue"
                     />
@@ -552,7 +552,7 @@ const LocalDashboard: React.FC = () => {
                     <label className="text-sm font-medium text-foreground">Priority</label>
                     <select
                       value={complaintForm.priority}
-                      onChange={(e) => setComplaintForm({...complaintForm, priority: e.target.value})}
+                      onChange={(e) => setComplaintForm({ ...complaintForm, priority: e.target.value })}
                       className="w-full mt-1 p-2 border border-gray-300 rounded-md"
                     >
                       <option value="low">Low</option>
@@ -564,8 +564,8 @@ const LocalDashboard: React.FC = () => {
                     <Button onClick={handleSubmitComplaint} className="btn-primary">
                       Submit Complaint
                     </Button>
-                    <Button 
-                      variant="outline" 
+                    <Button
+                      variant="outline"
                       onClick={() => setShowComplaintForm(false)}
                       className="btn-outline"
                     >
@@ -575,7 +575,7 @@ const LocalDashboard: React.FC = () => {
                 </CardContent>
               </Card>
             )}
-            
+
             <div className="space-y-4">
               {myComplaints.map((complaint) => (
                 <Card key={complaint.id} className="border">
@@ -628,7 +628,7 @@ const LocalDashboard: React.FC = () => {
                 <p className="text-muted-foreground">Submit and track your Forest Rights Act applications</p>
               </div>
               {userPermissions.canSubmitFRAApplications && (
-                <Button 
+                <Button
                   onClick={() => setShowFRAForm(true)}
                   className="btn-primary w-full sm:w-auto"
                 >
@@ -637,7 +637,7 @@ const LocalDashboard: React.FC = () => {
                 </Button>
               )}
             </div>
-            
+
             {/* FRA Application Form Modal */}
             {showFRAForm && (
               <div className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4">
@@ -649,7 +649,7 @@ const LocalDashboard: React.FC = () => {
                 </div>
               </div>
             )}
-            
+
             <FRAApplicationList
               applications={fraApplications}
               onEdit={handleEditFRAApplication}
@@ -673,7 +673,7 @@ const LocalDashboard: React.FC = () => {
               <h2 className="text-2xl font-bold text-foreground mb-2">Analytics Dashboard</h2>
               <p className="text-muted-foreground">{limitedMode ? 'Sign in to view detailed analytics' : 'View forest rights statistics and trends'}</p>
             </div>
-            
+
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 mb-8">
               <Card>
                 <CardHeader>
@@ -684,7 +684,7 @@ const LocalDashboard: React.FC = () => {
                   <p className="text-sm text-muted-foreground">In your region</p>
                 </CardContent>
               </Card>
-              
+
               <Card>
                 <CardHeader>
                   <CardTitle className="text-lg">Approved Claims</CardTitle>
@@ -694,7 +694,7 @@ const LocalDashboard: React.FC = () => {
                   <p className="text-sm text-muted-foreground">{limitedMode ? 'Login required' : '69% approval rate'}</p>
                 </CardContent>
               </Card>
-              
+
               <Card>
                 <CardHeader>
                   <CardTitle className="text-lg">My Complaints</CardTitle>
@@ -711,7 +711,7 @@ const LocalDashboard: React.FC = () => {
         {/* Desktop Control Panel */}
         {!isMobile && !selectedForest && (
           <div className="w-80 p-4 pl-2">
-            <ControlPanel 
+            <ControlPanel
               selectedFilters={filters}
               onFilterChange={setFilters}
               isMobile={false}

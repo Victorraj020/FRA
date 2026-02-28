@@ -7,7 +7,7 @@ import { VitePWA } from "vite-plugin-pwa";
 export default defineConfig(({ mode }) => ({
   server: {
     host: "::",
-    port: 8080,
+    port: 8081,
     fs: {
       // Allow serving files from one level up (monorepo/project root) so we can import DSS assets
       allow: [
