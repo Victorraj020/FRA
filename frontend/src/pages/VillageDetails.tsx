@@ -31,7 +31,7 @@ const VillageDetails: React.FC = () => {
           v = await api.dss.getVillageDetails(String(code));
         } catch (e) {
           // Fallback to local DSS GeoJSON under dssnewbhoomi
-          const res = await fetch('/dssnewbhoomi/data/village_indicators.geojson');
+          const res = await fetch('/dssnewbhoomi/data/village_indicators_light.geojson');
           const gj = await res.json();
           const feat = (Array.isArray(gj?.features) ? gj.features : []).find((f: any) => String(f?.properties?.village_code) === String(code));
           if (!feat) throw new Error('Village not found');
@@ -161,7 +161,7 @@ const VillageDetails: React.FC = () => {
               }
             }
             if (best) break;
-          } catch {}
+          } catch { }
         }
         if (best) {
           setDemography(best);
@@ -301,7 +301,7 @@ const VillageDetails: React.FC = () => {
                 <Tooltip formatter={(v: number) => `${Math.round(v * 100)}%`} />
                 <ReferenceLine y={0.75} stroke="#e5e7eb" strokeDasharray="4 4" />
                 <ReferenceLine y={0.5} stroke="#e5e7eb" strokeDasharray="4 4" />
-                <Bar dataKey="value" radius={[4,4,0,0]}>
+                <Bar dataKey="value" radius={[4, 4, 0, 0]}>
                   {impactData.map((_, idx) => (
                     <Cell key={`cell-${idx}`} fill={impactColors[idx % impactColors.length]} />
                   ))}
@@ -424,7 +424,7 @@ const VillageDetails: React.FC = () => {
                     <Tooltip formatter={(v: number) => `${Math.round(v * 100)}%`} />
                     <ReferenceLine y={0.25} stroke="#e5e7eb" strokeDasharray="3 3" />
                     <ReferenceLine y={0.5} stroke="#e5e7eb" strokeDasharray="3 3" />
-                    <Bar dataKey="value" radius={[4,4,0,0]}>
+                    <Bar dataKey="value" radius={[4, 4, 0, 0]}>
                       <Cell fill="#22c55e" />
                       <Cell fill="#ef4444" />
                       <Cell fill="#f59e0b" />

@@ -40,7 +40,7 @@ const VillagesList: React.FC = () => {
         try {
           gj = await api.dss.getVillagesGeoJSON();
         } catch {
-          const resp = await fetch('/dssnewbhoomi/data/village_indicators.geojson');
+          const resp = await fetch('/dssnewbhoomi/data/village_indicators_light.geojson');
           gj = await resp.json();
         }
         const feats = Array.isArray(gj?.features) ? gj.features : [];
@@ -106,9 +106,9 @@ const VillagesList: React.FC = () => {
 
           {/* Legend */}
           <div className="flex items-center gap-4 mt-3 text-xs">
-            <div className="flex items-center gap-2"><span className="inline-block w-3 h-3 rounded-sm" style={{background:'#22c55e'}}></span>Low (0–49)</div>
-            <div className="flex items-center gap-2"><span className="inline-block w-3 h-3 rounded-sm" style={{background:'#f59e0b'}}></span>Medium (50–74)</div>
-            <div className="flex items-center gap-2"><span className="inline-block w-3 h-3 rounded-sm" style={{background:'#ef4444'}}></span>High (75–100)</div>
+            <div className="flex items-center gap-2"><span className="inline-block w-3 h-3 rounded-sm" style={{ background: '#22c55e' }}></span>Low (0–49)</div>
+            <div className="flex items-center gap-2"><span className="inline-block w-3 h-3 rounded-sm" style={{ background: '#f59e0b' }}></span>Medium (50–74)</div>
+            <div className="flex items-center gap-2"><span className="inline-block w-3 h-3 rounded-sm" style={{ background: '#ef4444' }}></span>High (75–100)</div>
           </div>
           {error && <div className="text-red-600 mt-2">{error}</div>}
         </CardContent>
@@ -127,7 +127,7 @@ const VillagesList: React.FC = () => {
                     <div className="font-semibold">{r.village_name}</div>
                     <div className="text-xs text-muted-foreground">{r.district}{r.block ? ` • ${r.block}` : ''}</div>
                   </div>
-                  <div className="px-2 py-1 text-xs rounded text-white" style={{background: color}}>{s || 0}/100</div>
+                  <div className="px-2 py-1 text-xs rounded text-white" style={{ background: color }}>{s || 0}/100</div>
                 </div>
                 <div className="mt-2 grid grid-cols-2 gap-2 text-xs">
                   <div>👥 FRA: {r.fra_beneficiary_count ?? '—'}</div>

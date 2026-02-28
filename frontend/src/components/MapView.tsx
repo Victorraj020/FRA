@@ -2,6 +2,9 @@ import React, { useEffect, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
+import 'leaflet.markercluster';
+import 'leaflet.markercluster/dist/MarkerCluster.css';
+import 'leaflet.markercluster/dist/MarkerCluster.Default.css';
 import { mockVillages, Village, mockForestAreas, ForestArea } from '@/data/mockData';
 import { loadRealForestAreas, loadAngulVillages, type RealVillage, loadDSSVillages, type DSSVillage } from '@/lib/utils';
 import api from '@/services/api';
@@ -162,6 +165,7 @@ const MapView: React.FC<MapViewProps> = ({
   const [dssDistrict, setDssDistrict] = React.useState('');
   const [dssPriority, setDssPriority] = React.useState<'low' | 'medium' | 'high' | ''>('');
 
+<<<<<<< HEAD
   const [searchQuery, setSearchQuery] = React.useState("");
   const [isSearching, setIsSearching] = React.useState(false);
   const [showResults, setShowResults] = React.useState(false);
@@ -176,6 +180,8 @@ const MapView: React.FC<MapViewProps> = ({
     }, 800);
   };
 
+=======
+>>>>>>> b93dfe2 (Fix frontend lag by clustering 30k DSS markers and using lightweight GeoJSON)
   // Use real GeoJSON data for state boundaries
 
   const getStatusColor = (status: string) => {
@@ -490,7 +496,7 @@ const MapView: React.FC<MapViewProps> = ({
         try {
           geojson = await api.dss.getVillagesGeoJSON();
         } catch {
-          const res = await fetch('/dssnewbhoomi/data/village_indicators.geojson');
+          const res = await fetch('/dssnewbhoomi/data/village_indicators_light.geojson');
           geojson = await res.json();
         }
         // Load districts list for filters
@@ -498,10 +504,20 @@ const MapView: React.FC<MapViewProps> = ({
         if (!mapInstanceRef.current) return;
         // Remove old layer
         if (dssLayerRef.current) {
-          dssLayerRef.current.remove();
+          mapInstanceRef.current.removeLayer(dssLayerRef.current);
           dssLayerRef.current = null;
         }
-        dssLayerRef.current = L.geoJSON(geojson as any, {
+
+        const markers = L.markerClusterGroup({
+          chunkedLoading: true,
+          // Use spiderfyOnMaxZoom or keep it simple
+          spiderfyOnMaxZoom: true,
+          showCoverageOnHover: false,
+          zoomToBoundsOnClick: true,
+          maxClusterRadius: 50,
+        });
+
+        const geoJsonLayer = L.geoJSON(geojson as any, {
           pointToLayer: (feature: any, latlng: L.LatLng) => {
             const s = Number(feature?.properties?.priority_score ?? 0);
             return L.circleMarker(latlng, {
@@ -557,7 +573,11 @@ const MapView: React.FC<MapViewProps> = ({
               } catch { }
             });
           }
-        }).addTo(mapInstanceRef.current);
+        });
+
+        markers.addLayer(geoJsonLayer);
+        mapInstanceRef.current.addLayer(markers);
+        dssLayerRef.current = markers as any;
       } catch (e) {
         console.warn('DSS layer load failed; continuing with mock markers', e);
       }
@@ -572,7 +592,7 @@ const MapView: React.FC<MapViewProps> = ({
         try {
           res = await api.dss.search({ q: dssSearch || undefined, district: dssDistrict || undefined, priority: dssPriority || undefined as any });
         } catch {
-          const gjRes = await fetch('/dssnewbhoomi/data/village_indicators.geojson');
+          const gjRes = await fetch('/dssnewbhoomi/data/village_indicators_light.geojson');
           const gj = await gjRes.json();
           const features = Array.isArray(gj?.features) ? gj.features : [];
           const q = (dssSearch || '').toLowerCase();
@@ -589,8 +609,21 @@ const MapView: React.FC<MapViewProps> = ({
           res = { type: 'FeatureCollection', features: filtered };
         }
         if (!mapInstanceRef.current) return;
-        if (dssLayerRef.current) { dssLayerRef.current.remove(); dssLayerRef.current = null; }
-        dssLayerRef.current = L.geoJSON(res as any, {
+
+        if (dssLayerRef.current) {
+          mapInstanceRef.current.removeLayer(dssLayerRef.current);
+          dssLayerRef.current = null;
+        }
+
+        const markers = L.markerClusterGroup({
+          chunkedLoading: true,
+          spiderfyOnMaxZoom: true,
+          showCoverageOnHover: false,
+          zoomToBoundsOnClick: true,
+          maxClusterRadius: 50,
+        });
+
+        const geoJsonLayer = L.geoJSON(res as any, {
           pointToLayer: (feature: any, latlng: L.LatLng) => {
             const s = Number(feature?.properties?.priority_score ?? 0);
             return L.circleMarker(latlng, {
@@ -623,7 +656,11 @@ const MapView: React.FC<MapViewProps> = ({
             layer.bindTooltip(summary, { sticky: false, direction: 'top', opacity: 0.95 });
             layer.on('click', () => { try { window.location.href = `/village/${p.village_code}`; } catch { } });
           }
-        }).addTo(mapInstanceRef.current);
+        });
+
+        markers.addLayer(geoJsonLayer);
+        mapInstanceRef.current.addLayer(markers);
+        dssLayerRef.current = markers as any;
       } catch { }
     }, 300);
     return () => clearTimeout(id);
@@ -776,118 +813,210 @@ const MapView: React.FC<MapViewProps> = ({
         style={{ height: '100%', width: '100%', position: 'absolute', top: 0, left: 0 }}
         className="h-full w-full z-10"
       />
+<<<<<<< HEAD
+=======
 
-      {/* Right-Side Control Panel */}
-      <div className="absolute top-4 right-4 z-[1000] flex flex-col items-end gap-3 max-w-[320px] sm:max-w-[360px] w-full max-h-[calc(100%-32px)] overflow-y-auto scrollbar-hide pointer-events-none *:pointer-events-auto">
+      {/* Map Legend - Responsive */}
+      <div className="absolute top-2 left-2 sm:top-4 sm:left-4 bg-card p-2 sm:p-3 lg:p-4 rounded-lg shadow-card z-[1000] max-w-[200px] sm:max-w-xs">
+        <h4 className="font-semibold mb-2 text-xs sm:text-sm">{t('map.legend')}</h4>
+        <div className="space-y-1 sm:space-y-2">
+          {/* FRA Claims Legend - only show if FRA mode is enabled */}
+          {(mapMode === 'both' || mapMode === 'fra') && [
+            { status: t('status.approved'), color: '#22c55e' },
+            { status: t('status.pending'), color: '#f59e0b' },
+            { status: t('status.rejected'), color: '#ef4444' }
+          ].map(({ status, color }) => (
+            <div key={status} className="flex items-center space-x-1 sm:space-x-2 text-xs">
+              <div
+                className="w-2 h-2 sm:w-3 sm:h-3 rounded-full border border-white shadow-sm flex-shrink-0"
+                style={{ backgroundColor: color }}
+              />
+              <span className="text-xs truncate">{status}</span>
+            </div>
+          ))}
 
-        {/* Grid for Insights & Legend */}
-        <div className="w-full grid grid-cols-2 gap-3 items-start">
-
-          {/* Map Legend */}
-          <div className="bg-card/95 backdrop-blur p-3 rounded-xl border border-border shadow-card h-full">
-            <h4 className="font-semibold mb-2 text-xs flex items-center"><MapPin className="w-3.5 h-3.5 mr-1 text-primary" /> {t('map.legend')}</h4>
-            <div className="space-y-2">
-              {(mapMode === 'both' || mapMode === 'fra') && [
-                { status: t('status.approved'), color: '#22c55e' },
-                { status: t('status.pending'), color: '#f59e0b' },
-                { status: t('status.rejected'), color: '#ef4444' }
-              ].map(({ status, color }) => (
-                <div key={status} className="flex items-center space-x-2 text-[11px] tracking-tight text-gray-600">
-                  <div className="w-2.5 h-2.5 rounded-full shadow-sm flex-shrink-0" style={{ backgroundColor: color }} />
-                  <span className="truncate">{status}</span>
-                </div>
-              ))}
-
-              {/* State Boundaries Legend */}
-              <div className="flex items-center space-x-2 text-[11px] mt-2 pt-2 border-t border-gray-100 tracking-tight text-gray-600">
-                <div className="w-3 h-1 border-2 border-red-600 flex-shrink-0" style={{ background: 'repeating-linear-gradient(to right, #dc2626 0px, #dc2626 3px, transparent 3px, transparent 6px)' }} />
-                <span className="truncate">{t('map.stateBoundaries')}</span>
+          {/* Forest Markers Legend - only show if forest mode is enabled */}
+          {showForests && (mapMode === 'both' || mapMode === 'forests') && (
+            <>
+              <div className="flex items-center space-x-1 sm:space-x-2 text-xs mt-2 pt-2 border-t border-gray-200">
+                <div className="w-2 h-2 sm:w-3 sm:h-3 rounded-full bg-emerald-500 flex items-center justify-center text-white text-xs flex-shrink-0">🌲</div>
+                <span className="text-xs">{t('map.forestAreas')}</span>
               </div>
-            </div>
+              <div className="text-xs text-gray-600 ml-3 sm:ml-5">
+                <div>• {t('map.biodiversity.high')}</div>
+                <div>• {t('map.biodiversity.medium')}</div>
+                <div>• {t('map.biodiversity.low')}</div>
+              </div>
+            </>
+          )}
+
+          {/* State Boundaries Legend */}
+          <div className="flex items-center space-x-1 sm:space-x-2 text-xs mt-2 pt-2 border-t border-gray-200">
+            <div
+              className="w-3 h-1 sm:w-4 sm:h-1 border-2 border-red-600 flex-shrink-0"
+              style={{
+                background: 'repeating-linear-gradient(to right, #dc2626 0px, #dc2626 3px, transparent 3px, transparent 6px)'
+              }}
+            />
+            <span className="text-xs">{t('map.stateBoundaries')}</span>
           </div>
 
-          <div className="flex flex-col gap-3 h-full">
-            {/* DSS Priority Legend */}
-            <div className="bg-card/95 backdrop-blur p-3 rounded-xl border border-border shadow-card">
-              <div className="text-[11px] font-semibold mb-2">DSS Priority</div>
-              {[{ label: 'Low (0-49)', color: '#22c55e' }, { label: 'Medium (50-74)', color: '#f59e0b' }, { label: 'High (75+)', color: '#ef4444' }].map((it) => (
-                <div key={it.label} className="flex items-center gap-1.5 text-[11px] mb-1.5 tracking-tight text-gray-600 last:mb-0">
-                  <div className="w-2.5 h-2.5 rounded-sm flex-shrink-0" style={{ backgroundColor: it.color }} />
-                  <span>{it.label}</span>
-                </div>
-              ))}
-            </div>
-
-            {/* Insights panel */}
-            {(() => {
-              const villages = getFilteredVillages();
-              const byState: Record<string, number> = {};
-              villages.forEach(v => { byState[v.state] = (byState[v.state] || 0) + 1; });
-              const topStates = Object.entries(byState).sort((a, b) => b[1] - a[1]).slice(0, 3);
-              if (!topStates.length) return null;
-              return (
-                <div className="bg-card/95 backdrop-blur p-3 rounded-xl border border-border shadow-card max-h-[140px] overflow-auto">
-                  <div className="text-[11px] font-semibold mb-2">Top Insights</div>
-                  <div className="text-[11px] space-y-1.5">
-                    {topStates.map(([state, count]) => (
-                      <div key={state} className="flex items-center justify-between">
-                        <span className="truncate pr-1 text-gray-500">{state}</span>
-                        <span className="font-semibold text-gray-700 bg-gray-100 px-1.5 py-0.5 rounded">{count}</span>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              );
-            })()}
+          {/* District Boundaries Legend */}
+          <div className="flex items-center space-x-1 sm:space-x-2 text-xs mt-1">
+            <div
+              className="w-3 h-1 sm:w-4 sm:h-1 border border-emerald-500 flex-shrink-0"
+              style={{
+                background: 'repeating-linear-gradient(to right, #10b981 0px, #10b981 2px, transparent 2px, transparent 4px)'
+              }}
+            />
+            <span className="text-xs">{t('map.districtBoundaries')}</span>
           </div>
+>>>>>>> b93dfe2 (Fix frontend lag by clustering 30k DSS markers and using lightweight GeoJSON)
+
+  {/* Right-Side Control Panel */ }
+  <div className="absolute top-4 right-4 z-[1000] flex flex-col items-end gap-3 max-w-[320px] sm:max-w-[360px] w-full max-h-[calc(100%-32px)] overflow-y-auto scrollbar-hide pointer-events-none *:pointer-events-auto">
+
+<<<<<<< HEAD
+  {/* Grid for Insights & Legend */ }
+  <div className="w-full grid grid-cols-2 gap-3 items-start">
+=======
+      {/* DSS Priority Legend */}
+    <div className="absolute top-2 right-2 sm:top-4 sm:right-4 bg-card p-2 sm:p-3 rounded-lg shadow-card z-[1000]">
+      <div className="text-xs font-semibold mb-1">DSS Priority</div>
+      {[{ label: 'Low (0–49)', color: '#22c55e' }, { label: 'Medium (50–74)', color: '#f59e0b' }, { label: 'High (75–100)', color: '#ef4444' }].map((it) => (
+        <div key={it.label} className="flex items-center gap-2 text-xs">
+          <div className="w-3 h-3 rounded-sm" style={{ backgroundColor: it.color }} />
+          <span>{it.label}</span>
         </div>
+      ))}
+    </div>
+>>>>>>> b93dfe2 (Fix frontend lag by clustering 30k DSS markers and using lightweight GeoJSON)
 
-        {/* Current Selection / Mini Analytics */}
-        {(() => {
-          const villages = getFilteredVillages();
-          const approved = villages.filter(v => v.status === 'Approved').length;
-          const pending = villages.filter(v => v.status === 'Pending').length;
-          const rejected = villages.filter(v => v.status === 'Rejected').length;
-          const data = [
-            { name: 'Approved', value: approved, color: '#22c55e' },
-            { name: 'Pending', value: pending, color: '#f59e0b' },
-            { name: 'Rejected', value: rejected, color: '#ef4444' },
-          ];
-          return (
-            <div className="w-full bg-card/95 backdrop-blur rounded-xl border border-border shadow-card p-3">
-              <div className="text-[11px] font-semibold mb-2">Current Selection Analytics</div>
-              <div className="grid grid-cols-3 gap-2 text-[10px] mb-2">
-                <div className="text-center bg-green-50/80 rounded py-1.5 px-1 border border-green-100">
-                  <div className="font-bold text-green-600 text-sm">{approved}</div>
-                  <div className="text-green-800/70">Approved</div>
-                </div>
-                <div className="text-center bg-amber-50/80 rounded py-1.5 px-1 border border-amber-100">
-                  <div className="font-bold text-amber-600 text-sm">{pending}</div>
-                  <div className="text-amber-800/70">Pending</div>
-                </div>
-                <div className="text-center bg-red-50/80 rounded py-1.5 px-1 border border-red-100">
-                  <div className="font-bold text-red-600 text-sm">{rejected}</div>
-                  <div className="text-red-800/70">Rejected</div>
-                </div>
-              </div>
-              <div className="h-[88px] flex justify-center mt-2 border-t border-gray-100 pt-3 relative">
-                <ResponsiveContainer width="100%" height="100%">
-                  <PieChart>
-                    <Pie data={data} dataKey="value" nameKey="name" innerRadius={22} outerRadius={36} paddingAngle={3}>
-                      {data.map((entry, i) => (
-                        <Cell key={`cell-${i}`} fill={entry.color} strokeWidth={0} />
-                      ))}
-                    </Pie>
-                    <RTooltip formatter={(v: any, n: any) => [`${v}`, n]} contentStyle={{ fontSize: '11px', padding: '4px 8px', borderRadius: '8px', border: 'none', boxShadow: '0 4px 6px -1px rgb(0 0 0 / 0.1)' }} />
-                  </PieChart>
-                </ResponsiveContainer>
-              </div>
-            </div>
-          );
-        })()}
+    {/* Map Legend */}
+    <div className="bg-card/95 backdrop-blur p-3 rounded-xl border border-border shadow-card h-full">
+      <h4 className="font-semibold mb-2 text-xs flex items-center"><MapPin className="w-3.5 h-3.5 mr-1 text-primary" /> {t('map.legend')}</h4>
+      <div className="space-y-2">
+        {(mapMode === 'both' || mapMode === 'fra') && [
+          { status: t('status.approved'), color: '#22c55e' },
+          { status: t('status.pending'), color: '#f59e0b' },
+          { status: t('status.rejected'), color: '#ef4444' }
+        ].map(({ status, color }) => (
+          <div key={status} className="flex items-center space-x-2 text-[11px] tracking-tight text-gray-600">
+            <div className="w-2.5 h-2.5 rounded-full shadow-sm flex-shrink-0" style={{ backgroundColor: color }} />
+            <span className="truncate">{status}</span>
+          </div>
+        ))}
 
+        {/* State Boundaries Legend */}
+        <div className="flex items-center space-x-2 text-[11px] mt-2 pt-2 border-t border-gray-100 tracking-tight text-gray-600">
+          <div className="w-3 h-1 border-2 border-red-600 flex-shrink-0" style={{ background: 'repeating-linear-gradient(to right, #dc2626 0px, #dc2626 3px, transparent 3px, transparent 6px)' }} />
+          <span className="truncate">{t('map.stateBoundaries')}</span>
+        </div>
       </div>
     </div>
+
+<<<<<<< HEAD
+  <div className="flex flex-col gap-3 h-full">
+    {/* DSS Priority Legend */}
+    <div className="bg-card/95 backdrop-blur p-3 rounded-xl border border-border shadow-card">
+      <div className="text-[11px] font-semibold mb-2">DSS Priority</div>
+      {[{ label: 'Low (0-49)', color: '#22c55e' }, { label: 'Medium (50-74)', color: '#f59e0b' }, { label: 'High (75+)', color: '#ef4444' }].map((it) => (
+        <div key={it.label} className="flex items-center gap-1.5 text-[11px] mb-1.5 tracking-tight text-gray-600 last:mb-0">
+          <div className="w-2.5 h-2.5 rounded-sm flex-shrink-0" style={{ backgroundColor: it.color }} />
+          <span>{it.label}</span>
+=======
+      {/* Insights panel to utilize right-side whitespace on wide screens */}
+          {(() => {
+            const villages = getFilteredVillages();
+            const byState: Record<string, number> = {};
+            villages.forEach(v => { byState[v.state] = (byState[v.state] || 0) + 1; });
+            const topStates = Object.entries(byState)
+              .sort((a, b) => b[1] - a[1])
+              .slice(0, 5);
+            if (!topStates.length) return null;
+            return (
+              <div className="hidden xl:block absolute top-2 right-48 bg-white/95 backdrop-blur rounded-lg shadow-card p-3 z-[900] w-[220px] max-h-[260px] overflow-auto">
+                <div className="text-xs font-semibold mb-2">Insights</div>
+                <div className="text-[11px] space-y-2">
+                  {topStates.map(([state, count]) => (
+                    <div key={state} className="flex items-center justify-between">
+                      <span className="truncate pr-2">{state}</span>
+                      <span className="font-semibold">{count}</span>
+>>>>>>> b93dfe2 (Fix frontend lag by clustering 30k DSS markers and using lightweight GeoJSON)
+                    </div>
+                  ))}
+                </div>
+
+                {/* Insights panel */}
+                {(() => {
+                  const villages = getFilteredVillages();
+                  const byState: Record<string, number> = {};
+                  villages.forEach(v => { byState[v.state] = (byState[v.state] || 0) + 1; });
+                  const topStates = Object.entries(byState).sort((a, b) => b[1] - a[1]).slice(0, 3);
+                  if (!topStates.length) return null;
+                  return (
+                    <div className="bg-card/95 backdrop-blur p-3 rounded-xl border border-border shadow-card max-h-[140px] overflow-auto">
+                      <div className="text-[11px] font-semibold mb-2">Top Insights</div>
+                      <div className="text-[11px] space-y-1.5">
+                        {topStates.map(([state, count]) => (
+                          <div key={state} className="flex items-center justify-between">
+                            <span className="truncate pr-1 text-gray-500">{state}</span>
+                            <span className="font-semibold text-gray-700 bg-gray-100 px-1.5 py-0.5 rounded">{count}</span>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  );
+                })()}
+              </div>
+        </div>
+
+        {/* Current Selection / Mini Analytics */ }
+        {(() => {
+                const villages = getFilteredVillages();
+                const approved = villages.filter(v => v.status === 'Approved').length;
+                const pending = villages.filter(v => v.status === 'Pending').length;
+                const rejected = villages.filter(v => v.status === 'Rejected').length;
+                const data = [
+                  { name: 'Approved', value: approved, color: '#22c55e' },
+                  { name: 'Pending', value: pending, color: '#f59e0b' },
+                  { name: 'Rejected', value: rejected, color: '#ef4444' },
+                ];
+                return (
+                  <div className="w-full bg-card/95 backdrop-blur rounded-xl border border-border shadow-card p-3">
+                    <div className="text-[11px] font-semibold mb-2">Current Selection Analytics</div>
+                    <div className="grid grid-cols-3 gap-2 text-[10px] mb-2">
+                      <div className="text-center bg-green-50/80 rounded py-1.5 px-1 border border-green-100">
+                        <div className="font-bold text-green-600 text-sm">{approved}</div>
+                        <div className="text-green-800/70">Approved</div>
+                      </div>
+                      <div className="text-center bg-amber-50/80 rounded py-1.5 px-1 border border-amber-100">
+                        <div className="font-bold text-amber-600 text-sm">{pending}</div>
+                        <div className="text-amber-800/70">Pending</div>
+                      </div>
+                      <div className="text-center bg-red-50/80 rounded py-1.5 px-1 border border-red-100">
+                        <div className="font-bold text-red-600 text-sm">{rejected}</div>
+                        <div className="text-red-800/70">Rejected</div>
+                      </div>
+                    </div>
+                    <div className="h-[88px] flex justify-center mt-2 border-t border-gray-100 pt-3 relative">
+                      <ResponsiveContainer width="100%" height="100%">
+                        <PieChart>
+                          <Pie data={data} dataKey="value" nameKey="name" innerRadius={22} outerRadius={36} paddingAngle={3}>
+                            {data.map((entry, i) => (
+                              <Cell key={`cell-${i}`} fill={entry.color} strokeWidth={0} />
+                            ))}
+                          </Pie>
+                          <RTooltip formatter={(v: any, n: any) => [`${v}`, n]} contentStyle={{ fontSize: '11px', padding: '4px 8px', borderRadius: '8px', border: 'none', boxShadow: '0 4px 6px -1px rgb(0 0 0 / 0.1)' }} />
+                        </PieChart>
+                      </ResponsiveContainer>
+                    </div>
+                  </div>
+                );
+              })()}
+
+    </div>
+  </div>
   );
 };
 

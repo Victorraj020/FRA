@@ -222,8 +222,8 @@ export async function loadDSSVillages(fetchImpl: typeof fetch = fetch): Promise<
     // Compute relative path from frontend dev server root to DSS file
     // In dev, vite serves from project root; in prod, you can move the file to public/.
     const url = (typeof window !== 'undefined')
-      ? `${window.location.origin}/dssnewbhoomi/data/village_indicators.geojson`
-      : '/dssnewbhoomi/data/village_indicators.geojson';
+      ? `${window.location.origin}/dssnewbhoomi/data/village_indicators_light.geojson`
+      : '/dssnewbhoomi/data/village_indicators_light.geojson';
     const res = await fetchImpl(url);
     if (!res.ok) throw new Error(`Failed to fetch DSS villages: ${res.status}`);
     const gj = await res.json();
