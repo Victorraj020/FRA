@@ -4,13 +4,13 @@ import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Alert, AlertDescription } from '@/components/ui/alert';
 import { Progress } from '@/components/ui/progress';
-import { 
-  MapPin, 
-  TreePine, 
-  Droplets, 
-  Road, 
-  AlertTriangle, 
-  CheckCircle, 
+import {
+  MapPin,
+  TreePine,
+  Droplets,
+  Road,
+  AlertTriangle,
+  CheckCircle,
   Clock,
   Brain,
   Satellite,
@@ -64,7 +64,7 @@ const AIAssetAnalysis: React.FC<AIAssetAnalysisProps> = ({
       }, 500);
 
       const result = await aiService.analyzeSatelliteImagery(coordinates, 5);
-      
+
       clearInterval(progressInterval);
       setProgress(100);
       setAnalysisResult(result);
@@ -126,7 +126,7 @@ const AIAssetAnalysis: React.FC<AIAssetAnalysisProps> = ({
             </div>
             <Progress value={progress} className="w-full" />
           </div>
-          
+
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
             <div className="flex items-center gap-2">
               <Satellite className="w-4 h-4 text-blue-500" />
@@ -237,11 +237,10 @@ const AIAssetAnalysis: React.FC<AIAssetAnalysisProps> = ({
         <CardContent>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             {analysisResult.landAssets.map((asset) => (
-              <Card 
-                key={asset.id} 
-                className={`cursor-pointer transition-all hover:shadow-md ${
-                  selectedAsset?.id === asset.id ? 'ring-2 ring-blue-500' : ''
-                }`}
+              <Card
+                key={asset.id}
+                className={`cursor-pointer transition-all hover:shadow-md ${selectedAsset?.id === asset.id ? 'ring-2 ring-blue-500' : ''
+                  }`}
                 onClick={() => setSelectedAsset(asset)}
               >
                 <CardContent className="p-4">

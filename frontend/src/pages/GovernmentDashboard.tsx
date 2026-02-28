@@ -9,13 +9,13 @@ import { Input } from '@/components/ui/input';
 import FRAApplicationList from '@/components/FRAApplicationList';
 import RoleSpecificDashboard from '@/components/RoleSpecificDashboard';
 import AIInsightsDashboard from '@/components/AIInsightsDashboard';
-import { 
-  MapPin, 
-  FileText, 
-  BarChart3, 
-  Grid3X3, 
-  LogOut, 
-  User, 
+import {
+  MapPin,
+  FileText,
+  BarChart3,
+  Grid3X3,
+  LogOut,
+  User,
   Shield,
   AlertTriangle,
   CheckCircle,
@@ -30,7 +30,8 @@ import {
   FileScan,
   FileCheck,
   Users,
-  Settings
+  Settings,
+  Megaphone
 } from 'lucide-react';
 import MapView from '@/components/MapView';
 import ControlPanel from '@/components/ControlPanel';
@@ -118,7 +119,7 @@ const GovernmentDashboard: React.FC = () => {
       const url = new URL(window.location.href);
       url.searchParams.set('tab', 'analytics');
       window.history.pushState({}, '', url.toString());
-    } catch {}
+    } catch { }
     setActiveTab('analytics');
   };
   const [analytics, setAnalytics] = useState<DashboardDataResponse | null>(null);
@@ -129,7 +130,7 @@ const GovernmentDashboard: React.FC = () => {
     const d = new Date();
     return d.toLocaleDateString('en-IN', { day: '2-digit', month: 'short', year: 'numeric' });
   }, []);
-  
+
   // Derived analytics for selected state (client-side using mock data for realism)
   // Authoritative state overrides (trusted figures)
   const stateOverrides: Record<string, {
@@ -189,7 +190,7 @@ const GovernmentDashboard: React.FC = () => {
     if (stateOverrides[selectedState]) {
       const o = stateOverrides[selectedState];
       const pending = Math.max(o.totalClaims - (o.approvedTitles + o.rejectedClaims), 0);
-      const months = ['Jan','Feb','Mar','Apr','May','Jun'];
+      const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'];
       // Create a realistic monthly trend focusing on approval growth
       const monthlyGrowth = months.map((m, idx) => ({
         month: m,
@@ -205,11 +206,11 @@ const GovernmentDashboard: React.FC = () => {
         monthlyGrowth,
         breakdown: (typeof o.ifrClaims === 'number' && typeof o.cfrClaims === 'number' && typeof o.ifrTitles === 'number' && typeof o.cfrTitles === 'number')
           ? {
-              ifrClaims: o.ifrClaims,
-              cfrClaims: o.cfrClaims,
-              ifrTitles: o.ifrTitles,
-              cfrTitles: o.cfrTitles,
-            }
+            ifrClaims: o.ifrClaims,
+            cfrClaims: o.cfrClaims,
+            ifrTitles: o.ifrTitles,
+            cfrTitles: o.cfrTitles,
+          }
           : undefined,
         asOf: o.asOf,
       } as any;
@@ -222,7 +223,7 @@ const GovernmentDashboard: React.FC = () => {
       const approved = Math.round(base * 0.58);
       const pending = Math.round(base * 0.32);
       const rejected = Math.max(base - approved - pending, 0);
-      const months = ['Jan','Feb','Mar','Apr','May','Jun'];
+      const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'];
       const monthlyGrowth = months.map((m, idx) => ({
         month: m,
         approved: Math.round(approved / 12 + ((seed % 50) - 25) + idx * 7),
@@ -242,12 +243,12 @@ const GovernmentDashboard: React.FC = () => {
     const rejected = villages.filter(v => v.status === 'Rejected').length * 9;
     const total = approved + pending + rejected;
     // Build a simple trend that reflects volume
-    const months = ['Jan','Feb','Mar','Apr','May','Jun'];
+    const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'];
     const monthlyGrowth = months.map((m, idx) => ({
       month: m,
-      approved: Math.max(5, Math.round((approved/6) * (0.8 + 0.05*idx))),
-      pending: Math.max(3, Math.round((pending/6) * (0.9 + 0.03*idx))),
-      rejected: Math.max(1, Math.round((rejected/6) * (0.85 + 0.02*idx)))
+      approved: Math.max(5, Math.round((approved / 6) * (0.8 + 0.05 * idx))),
+      pending: Math.max(3, Math.round((pending / 6) * (0.9 + 0.03 * idx))),
+      rejected: Math.max(1, Math.round((rejected / 6) * (0.85 + 0.02 * idx)))
     }));
     return { total, approved, pending, rejected, monthlyGrowth };
   }, [filters.state]);
@@ -292,7 +293,7 @@ const GovernmentDashboard: React.FC = () => {
   useEffect(() => {
     const params = new URLSearchParams(location.search);
     const tabParam = params.get('tab');
-    if (tabParam && ['dashboard','map','alerts','complaints','fra-applications','role-dashboard','analytics','ocr'].includes(tabParam)) {
+    if (tabParam && ['dashboard', 'map', 'alerts', 'complaints', 'fra-applications', 'role-dashboard', 'analytics', 'ocr'].includes(tabParam)) {
       setActiveTab(tabParam);
     }
   }, [location.search]);
@@ -346,10 +347,10 @@ const GovernmentDashboard: React.FC = () => {
     try {
       await logout();
       console.log('GovernmentDashboard: Logout completed');
-      
+
       // Force redirect immediately
       window.location.href = '/';
-      
+
     } catch (error) {
       console.error('GovernmentDashboard: Failed to log out:', error);
       // Force redirect even on error
@@ -388,8 +389,8 @@ const GovernmentDashboard: React.FC = () => {
   };
 
   const handleComplaintStatusChange = (complaintId: number, newStatus: string) => {
-    setComplaints(complaints.map(complaint => 
-      complaint.id === complaintId 
+    setComplaints(complaints.map(complaint =>
+      complaint.id === complaintId
         ? { ...complaint, status: newStatus }
         : complaint
     ));
@@ -416,14 +417,14 @@ const GovernmentDashboard: React.FC = () => {
   };
 
   const handleStatusChangeFRAApplication = (applicationId: string, status: FRAApplication['status'], notes?: string) => {
-    setFraApplications(fraApplications.map(app => 
-      app.id === applicationId 
-        ? { 
-            ...app, 
-            status, 
-            reviewNotes: notes,
-            reviewedBy: currentUser?.displayName || 'Government User'
-          }
+    setFraApplications(fraApplications.map(app =>
+      app.id === applicationId
+        ? {
+          ...app,
+          status,
+          reviewNotes: notes,
+          reviewedBy: currentUser?.displayName || 'Government User'
+        }
         : app
     ));
   };
@@ -434,7 +435,7 @@ const GovernmentDashboard: React.FC = () => {
   };
 
   const handleUpdateAlert = (id: string, updates: Partial<AlertType>) => {
-    setAlerts(alerts.map(alert => 
+    setAlerts(alerts.map(alert =>
       alert.id === id ? { ...alert, ...updates } : alert
     ));
   };
@@ -529,7 +530,7 @@ const GovernmentDashboard: React.FC = () => {
                     <X className="h-4 w-4" />
                   </Button>
                 </div>
-                <ControlPanel 
+                <ControlPanel
                   selectedFilters={filters}
                   onFilterChange={setFilters}
                   isMobile={true}
@@ -570,7 +571,7 @@ const GovernmentDashboard: React.FC = () => {
                 </div>
               </div>
             </div>
-            
+
             {/* Map or Forest Content */}
             <div className="flex-1" style={{ minHeight: 'calc(100vh - var(--nav-height))' }}>
               {!selectedForest ? (
@@ -595,7 +596,7 @@ const GovernmentDashboard: React.FC = () => {
                 <div className="flex items-center gap-2 text-xs text-muted-foreground">
                   <span>Status on implementation of FRA in Odisha</span>
                   <span className="px-2 py-0.5 rounded-full border bg-muted/30 text-muted-foreground">Data as on {asOfLabel}</span>
-              </div>
+                </div>
               </div>
               <div className="flex items-center gap-2">
                 <Button
@@ -603,34 +604,41 @@ const GovernmentDashboard: React.FC = () => {
                   onClick={() => {
                     // Export current table as CSV
                     const rows = [
-                      ['Activities','Individual Rights','Community Rights','CFR Rights','Total Community','Grand Total'],
-                      ['Claims Received','691,948','17,265','15,179','32,444','724,392'],
-                      ['Claims Approved','468,133','6,323','4,903','11,226','479,359'],
-                      ['Titles Distributed','461,475','4,784','3,992','8,776','470,251'],
-                      ['Area Involved','673,850.89 Acres','278,154.02 Acres','458,734.83 Acres','736,888.85 Acres','1,410,739.74 Acres'],
-                      ['Claims Rejected','144,104','404','128','532','144,636'],
-                      ['Claims Pending','86,369','12,077','11,059','23,136','109,505'],
+                      ['Activities', 'Individual Rights', 'Community Rights', 'CFR Rights', 'Total Community', 'Grand Total'],
+                      ['Claims Received', '691,948', '17,265', '15,179', '32,444', '724,392'],
+                      ['Claims Approved', '468,133', '6,323', '4,903', '11,226', '479,359'],
+                      ['Titles Distributed', '461,475', '4,784', '3,992', '8,776', '470,251'],
+                      ['Area Involved', '673,850.89 Acres', '278,154.02 Acres', '458,734.83 Acres', '736,888.85 Acres', '1,410,739.74 Acres'],
+                      ['Claims Rejected', '144,104', '404', '128', '532', '144,636'],
+                      ['Claims Pending', '86,369', '12,077', '11,059', '23,136', '109,505'],
                     ];
-                    const csv = rows.map(r => r.map(v => `"${String(v).replace(/"/g,'""')}"`).join(',')).join('\n');
+                    const csv = rows.map(r => r.map(v => `"${String(v).replace(/"/g, '""')}"`).join(',')).join('\n');
                     const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
                     const link = document.createElement('a');
                     link.href = URL.createObjectURL(blob);
-                    link.download = `fra_status_${new Date().toISOString().slice(0,10)}.csv`;
+                    link.download = `fra_status_${new Date().toISOString().slice(0, 10)}.csv`;
                     link.click();
                   }}
                 >
                   Export CSV
                 </Button>
-              <Button
-                onClick={() => setIsEditing(true)}
-                className="bg-amber-600 hover:bg-amber-700 text-white"
-              >
-                <Edit className="w-4 h-4 mr-2" />
-                Edit Data
-              </Button>
+                <Button
+                  onClick={() => window.location.href = '/ai-insights'}
+                  className="bg-indigo-600 hover:bg-indigo-700 text-white border-none shadow focus:ring-4 focus:ring-indigo-100 flex items-center justify-center font-medium"
+                >
+                  <Megaphone className="w-4 h-4 mr-2" />
+                  View AI Insights
+                </Button>
+                <Button
+                  onClick={() => setIsEditing(true)}
+                  className="bg-amber-600 hover:bg-amber-700 text-white"
+                >
+                  <Edit className="w-4 h-4 mr-2" />
+                  Edit Data
+                </Button>
               </div>
             </div>
-            
+
             {/* KPIs above the FRA table */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
               <Card onClick={goToAnalytics} className="cursor-pointer hover:shadow-md transition-shadow" aria-label="View analytics for total claims">
@@ -663,7 +671,7 @@ const GovernmentDashboard: React.FC = () => {
                   }</div>
                   <p className="text-xs text-muted-foreground">{
                     stateAnalytics
-                      ? `${Math.round((stateAnalytics.approved/Math.max(stateAnalytics.total,1))*100)}% approval rate`
+                      ? `${Math.round((stateAnalytics.approved / Math.max(stateAnalytics.total, 1)) * 100)}% approval rate`
                       : 'Approval totals'
                   }</p>
                 </CardContent>
@@ -685,7 +693,7 @@ const GovernmentDashboard: React.FC = () => {
                 </CardContent>
               </Card>
             </div>
-            
+
             {/* FRA Data Grid */}
             <div className="bg-gradient-to-br from-amber-50 to-yellow-100 rounded-lg p-4 shadow-lg border border-amber-200">
               <div className="overflow-x-auto">
@@ -778,7 +786,7 @@ const GovernmentDashboard: React.FC = () => {
                 </table>
               </div>
             </div>
-            
+
             {/* Edit Modal for Government Users */}
             {isEditing && (
               <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
@@ -793,7 +801,7 @@ const GovernmentDashboard: React.FC = () => {
                       <X className="w-4 h-4" />
                     </Button>
                   </div>
-                  
+
                   <div className="space-y-4">
                     <Alert>
                       <AlertTriangle className="h-4 w-4" />
@@ -801,7 +809,7 @@ const GovernmentDashboard: React.FC = () => {
                         You are editing official FRA implementation data. Changes will be visible to all users.
                       </AlertDescription>
                     </Alert>
-                    
+
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                       <div>
                         <label className="block text-sm font-medium text-gray-700 mb-1">Claims Received - Individual Rights</label>
@@ -828,7 +836,7 @@ const GovernmentDashboard: React.FC = () => {
                         <Input defaultValue="4,903" className="w-full" />
                       </div>
                     </div>
-                    
+
                     <div className="flex justify-end space-x-2 pt-4">
                       <Button
                         variant="outline"
@@ -853,10 +861,10 @@ const GovernmentDashboard: React.FC = () => {
                 </div>
               </div>
             )}
-            
+
             {/* FAQ section below the FRA chart */}
             <FAQSection />
-            
+
             {/* Get In Touch section at the bottom of the page */}
             <GetInTouch />
           </div>
@@ -881,7 +889,7 @@ const GovernmentDashboard: React.FC = () => {
               <h2 className="text-2xl font-bold text-foreground mb-2">Complaints & Issues</h2>
               <p className="text-muted-foreground">Manage complaints submitted by local users</p>
             </div>
-            
+
             <div className="space-y-4">
               {complaints.map((complaint) => (
                 <Card key={complaint.id} className="border">
@@ -911,11 +919,10 @@ const GovernmentDashboard: React.FC = () => {
                         variant="outline"
                         onClick={() => handleComplaintStatusChange(complaint.id, 'in-progress')}
                         disabled={complaint.status === 'in-progress'}
-                        className={`px-3 py-2 rounded-lg font-medium transition-all duration-200 ${
-                          complaint.status === 'in-progress' 
-                            ? 'bg-yellow-100 text-yellow-800 border-yellow-300 cursor-not-allowed' 
+                        className={`px-3 py-2 rounded-lg font-medium transition-all duration-200 ${complaint.status === 'in-progress'
+                            ? 'bg-yellow-100 text-yellow-800 border-yellow-300 cursor-not-allowed'
                             : 'border-2 border-yellow-400 text-yellow-700 hover:bg-yellow-50 hover:border-yellow-500'
-                        }`}
+                          }`}
                       >
                         <Clock className="w-4 h-4 mr-1" />
                         In Progress
@@ -925,11 +932,10 @@ const GovernmentDashboard: React.FC = () => {
                         variant="outline"
                         onClick={() => handleComplaintStatusChange(complaint.id, 'resolved')}
                         disabled={complaint.status === 'resolved'}
-                        className={`px-3 py-2 rounded-lg font-medium transition-all duration-200 ${
-                          complaint.status === 'resolved' 
-                            ? 'bg-green-100 text-green-800 border-green-300 cursor-not-allowed' 
+                        className={`px-3 py-2 rounded-lg font-medium transition-all duration-200 ${complaint.status === 'resolved'
+                            ? 'bg-green-100 text-green-800 border-green-300 cursor-not-allowed'
                             : 'border-2 border-green-400 text-green-700 hover:bg-green-50 hover:border-green-500'
-                        }`}
+                          }`}
                       >
                         <CheckCircle className="w-4 h-4 mr-1" />
                         Resolve
@@ -949,7 +955,7 @@ const GovernmentDashboard: React.FC = () => {
               <h2 className="text-2xl font-bold text-foreground mb-2">FRA Applications Management</h2>
               <p className="text-muted-foreground">Review and manage Forest Rights Act applications</p>
             </div>
-            
+
             <FRAApplicationList
               applications={fraApplications}
               onEdit={handleEditFRAApplication}
@@ -1024,12 +1030,12 @@ const GovernmentDashboard: React.FC = () => {
                 <p className="text-muted-foreground text-sm">Comprehensive analytics and reporting for the Forest Rights Act. Figures update periodically from authoritative sources.</p>
               </div>
             </div>
-            
+
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 mb-8">
               <Card>
                 <CardHeader>
                   <div className="flex items-center justify-between">
-                  <CardTitle className="text-lg">Total claims filed</CardTitle>
+                    <CardTitle className="text-lg">Total claims filed</CardTitle>
                     <span className="text-[10px] px-2 py-0.5 rounded-full border bg-muted/30 text-muted-foreground">{filters.state !== 'all-states' ? 'Filtered' : 'All India'}</span>
                   </div>
                 </CardHeader>
@@ -1053,12 +1059,12 @@ const GovernmentDashboard: React.FC = () => {
                   </div>
                 </CardContent>
               </Card>
-              
+
               <Card>
                 <CardHeader>
                   <div className="flex items-center justify-between">
-                  <CardTitle className="text-lg">Titles distributed (approved)</CardTitle>
-                    <span className="text-[10px] px-2 py-0.5 rounded-full border bg-green-50 text-green-700">Δ {stateAnalytics ? Math.round((stateAnalytics.approved/Math.max((stateAnalytics.total - stateAnalytics.approved),1))*3) : 7}%</span>
+                    <CardTitle className="text-lg">Titles distributed (approved)</CardTitle>
+                    <span className="text-[10px] px-2 py-0.5 rounded-full border bg-green-50 text-green-700">Δ {stateAnalytics ? Math.round((stateAnalytics.approved / Math.max((stateAnalytics.total - stateAnalytics.approved), 1)) * 3) : 7}%</span>
                   </div>
                 </CardHeader>
                 <CardContent>
@@ -1071,7 +1077,7 @@ const GovernmentDashboard: React.FC = () => {
                   }</div>
                   <p className="text-sm text-muted-foreground">{
                     stateAnalytics
-                      ? `${Math.round((stateAnalytics.approved/Math.max(stateAnalytics.total,1))*100)}% approval rate`
+                      ? `${Math.round((stateAnalytics.approved / Math.max(stateAnalytics.total, 1)) * 100)}% approval rate`
                       : analytics
                         ? ((analytics as any).__fallback ? 'Mock data (offline)' : `${Math.round((analytics.approved_applications / Math.max(analytics.total_applications || 1, 1)) * 100)}% approval rate`)
                         : analyticsLoading ? 'Loading…' : 'Unavailable'
@@ -1085,11 +1091,11 @@ const GovernmentDashboard: React.FC = () => {
                   </div>
                 </CardContent>
               </Card>
-              
+
               <Card>
                 <CardHeader>
                   <div className="flex items-center justify-between">
-                  <CardTitle className="text-lg">Claims pending</CardTitle>
+                    <CardTitle className="text-lg">Claims pending</CardTitle>
                     <span className="text-[10px] px-2 py-0.5 rounded-full border bg-yellow-50 text-yellow-700">Target ↓ {stateAnalytics ? 15 : 10}%</span>
                   </div>
                 </CardHeader>
@@ -1165,10 +1171,10 @@ const GovernmentDashboard: React.FC = () => {
                     }}
                     tooltipLabel={(f: any, v: number) => `${f?.properties?.st_nm || f?.properties?.name}: ${v}K titles`}
                     geojsonUrl="/four_states_india.geojson"
-                    highlightStates={["Madhya Pradesh","Odisha","Telangana","Tripura"]}
+                    highlightStates={["Madhya Pradesh", "Odisha", "Telangana", "Tripura"]}
                     selectedState={filters.state !== 'all-states' ? filters.state : undefined}
                     onStateClick={(name) => {
-                      const allowed = ["Madhya Pradesh","Odisha","Telangana","Tripura"];
+                      const allowed = ["Madhya Pradesh", "Odisha", "Telangana", "Tripura"];
                       if (allowed.includes(name)) setFilters({ ...filters, state: name });
                     }}
                   />
@@ -1195,7 +1201,7 @@ const GovernmentDashboard: React.FC = () => {
                   <div className="border rounded-md p-3 bg-white">
                     <div className="text-xs text-muted-foreground mb-2">Focus States Overview</div>
                     <ul className="space-y-2 text-sm">
-                      {['Madhya Pradesh','Odisha','Telangana','Tripura'].map((name) => {
+                      {['Madhya Pradesh', 'Odisha', 'Telangana', 'Tripura'].map((name) => {
                         const o = (stateOverrides as any)[name] || {};
                         const total = o.totalClaims || 0;
                         const approved = o.approvedTitles || 0;
@@ -1292,15 +1298,15 @@ const GovernmentDashboard: React.FC = () => {
                         <Pie
                           data={(stateAnalytics
                             ? [
-                                { name: 'Approved', value: stateAnalytics.approved, color: 'hsl(var(--status-approved))' },
-                                { name: 'Pending', value: stateAnalytics.pending, color: 'hsl(var(--status-pending))' },
-                                { name: 'Rejected', value: stateAnalytics.rejected, color: 'hsl(var(--status-rejected))' }
-                              ]
+                              { name: 'Approved', value: stateAnalytics.approved, color: 'hsl(var(--status-approved))' },
+                              { name: 'Pending', value: stateAnalytics.pending, color: 'hsl(var(--status-pending))' },
+                              { name: 'Rejected', value: stateAnalytics.rejected, color: 'hsl(var(--status-rejected))' }
+                            ]
                             : [
-                                { name: 'Approved', value: mockStatistics.approvedClaims, color: 'hsl(var(--status-approved))' },
-                                { name: 'Pending', value: mockStatistics.pendingClaims, color: 'hsl(var(--status-pending))' },
-                                { name: 'Rejected', value: mockStatistics.rejectedClaims, color: 'hsl(var(--status-rejected))' }
-                              ])}
+                              { name: 'Approved', value: mockStatistics.approvedClaims, color: 'hsl(var(--status-approved))' },
+                              { name: 'Pending', value: mockStatistics.pendingClaims, color: 'hsl(var(--status-pending))' },
+                              { name: 'Rejected', value: mockStatistics.rejectedClaims, color: 'hsl(var(--status-rejected))' }
+                            ])}
                           cx="50%"
                           cy="50%"
                           innerRadius={50}
@@ -1312,17 +1318,17 @@ const GovernmentDashboard: React.FC = () => {
                         >
                           {(stateAnalytics
                             ? [
-                                { name: 'Approved', value: stateAnalytics.approved, color: 'hsl(var(--status-approved))' },
-                                { name: 'Pending', value: stateAnalytics.pending, color: 'hsl(var(--status-pending))' },
-                                { name: 'Rejected', value: stateAnalytics.rejected, color: 'hsl(var(--status-rejected))' }
-                              ]
+                              { name: 'Approved', value: stateAnalytics.approved, color: 'hsl(var(--status-approved))' },
+                              { name: 'Pending', value: stateAnalytics.pending, color: 'hsl(var(--status-pending))' },
+                              { name: 'Rejected', value: stateAnalytics.rejected, color: 'hsl(var(--status-rejected))' }
+                            ]
                             : [
-                                { name: 'Approved', value: mockStatistics.approvedClaims, color: 'hsl(var(--status-approved))' },
-                                { name: 'Pending', value: mockStatistics.pendingClaims, color: 'hsl(var(--status-pending))' },
-                                { name: 'Rejected', value: mockStatistics.rejectedClaims, color: 'hsl(var(--status-rejected))' }
-                              ]).map((entry, index) => (
-                            <Cell key={`cell-${index}`} fill={entry.color} />
-                          ))}
+                              { name: 'Approved', value: mockStatistics.approvedClaims, color: 'hsl(var(--status-approved))' },
+                              { name: 'Pending', value: mockStatistics.pendingClaims, color: 'hsl(var(--status-pending))' },
+                              { name: 'Rejected', value: mockStatistics.rejectedClaims, color: 'hsl(var(--status-rejected))' }
+                            ]).map((entry, index) => (
+                              <Cell key={`cell-${index}`} fill={entry.color} />
+                            ))}
                         </Pie>
                         <Tooltip formatter={(v: any) => (typeof v === 'number' ? v.toLocaleString() : v)} />
                         <Legend verticalAlign="bottom" height={24} wrapperStyle={{ fontSize: 12 }} />
@@ -1355,7 +1361,7 @@ const GovernmentDashboard: React.FC = () => {
                   <CardHeader className="pb-1"><CardTitle className="text-sm">Claims Rejected</CardTitle></CardHeader>
                   <CardContent>
                     <div className="text-xl font-semibold text-red-700">{(stateAnalytics as any).rejected.toLocaleString()}</div>
-                    <div className="text-xs text-muted-foreground">Share {Math.round(((stateAnalytics as any).rejected/Math.max((stateAnalytics as any).total,1))*100)}%</div>
+                    <div className="text-xs text-muted-foreground">Share {Math.round(((stateAnalytics as any).rejected / Math.max((stateAnalytics as any).total, 1)) * 100)}%</div>
                   </CardContent>
                 </Card>
                 <Card>
@@ -1399,7 +1405,7 @@ const GovernmentDashboard: React.FC = () => {
         {/* Desktop Control Panel */}
         {!isMobile && !selectedForest && (
           <div className="w-80 p-4 pl-2 space-y-3">
-            <ControlPanel 
+            <ControlPanel
               selectedFilters={filters}
               onFilterChange={setFilters}
               isMobile={false}
@@ -1413,10 +1419,10 @@ const GovernmentDashboard: React.FC = () => {
                   <ResponsiveContainer width="100%" height="100%">
                     <PieChart>
                       <Pie data={[
-                          { name: 'Approved', value: sidebarMapStats.approved, color: 'hsl(var(--status-approved))' },
-                          { name: 'Pending', value: sidebarMapStats.pending, color: 'hsl(var(--status-pending))' },
-                          { name: 'Rejected', value: sidebarMapStats.rejected, color: 'hsl(var(--status-rejected))' },
-                        ]} dataKey="value" nameKey="name" innerRadius={20} outerRadius={36} paddingAngle={2}>
+                        { name: 'Approved', value: sidebarMapStats.approved, color: 'hsl(var(--status-approved))' },
+                        { name: 'Pending', value: sidebarMapStats.pending, color: 'hsl(var(--status-pending))' },
+                        { name: 'Rejected', value: sidebarMapStats.rejected, color: 'hsl(var(--status-rejected))' },
+                      ]} dataKey="value" nameKey="name" innerRadius={20} outerRadius={36} paddingAngle={2}>
                         <Cell fill="hsl(var(--status-approved))" />
                         <Cell fill="hsl(var(--status-pending))" />
                         <Cell fill="hsl(var(--status-rejected))" />

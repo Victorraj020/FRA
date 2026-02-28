@@ -25,13 +25,15 @@ import NotFound from "./pages/NotFound";
 import Documentation from "./pages/Documentation";
 import Security from "./pages/Security";
 import Status from "./pages/Status";
-import ChatWidget from "@/components/ChatWidget";
+import AIChatbot from "@/components/AIChatbot";
 import PWAInstallPrompt from "@/components/PWAInstallPrompt";
 import MoTAInfo from "./pages/MoTAInfo";
+import AIInsights from "./pages/AIInsights";
 import VillageDetails from "./pages/VillageDetails";
 import AmenitiesViewer from "./pages/AmenitiesViewer";
 import VillagesList from "./pages/VillagesList";
 import GovLayout from "@/components/GovLayout";
+import SatelliteMapping from "./pages/SatelliteMapping";
 // Footer removed per request
 
 const queryClient = new QueryClient();
@@ -227,6 +229,7 @@ const AppContent = () => {
             <Route path="/mota-info" element={<MoTAInfo />} />
             <Route path="/village/:code" element={<VillageDetails />} />
             <Route path="/villages" element={<VillagesList />} />
+            <Route path="/satellite-mapping" element={<SatelliteMapping />} />
             <Route path="/amenities" element={<AmenitiesViewer />} />
             {/* Legacy/alias routes mapping to tabbed dashboards */}
             <Route path="/map" element={<LegacyMapRedirect />} />
@@ -234,12 +237,12 @@ const AppContent = () => {
             <Route path="/fra-applications" element={<LegacyFRAApplicationsRedirect />} />
             <Route path="/complaints" element={<LegacyComplaintsRedirect />} />
             <Route path="/alerts" element={<LegacyAlertsRedirect />} />
-            <Route path="/ai-insights" element={<LegacyAIInsightsRedirect />} />
+            <Route path="/ai-insights" element={<AIInsights />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>
         </div>
-        <ChatWidget autoOpenDelayMs={10000} />
+        <AIChatbot />
         <PWAInstallPrompt />
       </div>
     </GovLayout>

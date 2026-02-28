@@ -1,0 +1,13 @@
+{
+  "village_code": 1,
+  "village_name": "Dimiripatana",
+  "district": "Nayagarh",
+  "fra_beneficiary_count": 0,
+  "pm_kisan_count": 0,
+  "pm_kisan_eligible_count": 0,
+  "jjm_coverage_pct": 0.0,
+  "groundwater_index": 0.0,
+  "water_stress_score": 0.3,
+  "priority_score": 21.0,
+  "recommendations": []
+}

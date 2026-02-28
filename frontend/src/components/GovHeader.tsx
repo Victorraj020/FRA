@@ -1,5 +1,5 @@
 import React from 'react';
-import { Home, Info, PhoneCall, User, ChevronDown, LogOut, LogIn, Mail, Shield, Menu, X } from 'lucide-react';
+import { Home, Info, PhoneCall, User, ChevronDown, LogOut, LogIn, Mail, Shield, Menu, X, Satellite } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import { useAuth } from '@/contexts/AuthContext';
 import { Button } from '@/components/ui/button';
@@ -89,10 +89,22 @@ const GovHeader: React.FC = () => {
     }
   };
 
+  const goToAIInsights = () => {
+    setIsMobileMenuOpen(false);
+    navigate('/ai-insights');
+  };
+
+  const goToSatelliteMapping = () => {
+    setIsMobileMenuOpen(false);
+    navigate('/satellite-mapping');
+  };
+
   const navLinks = [
     { label: 'Home', onClick: () => { setIsMobileMenuOpen(false); navigate('/'); }, icon: <Home className="w-4 h-4" /> },
     { label: 'Map', onClick: goToMap },
     ...(userPermissions?.canViewAnalytics ? [{ label: 'Analytics', onClick: goToAnalytics }] : []),
+    { label: 'AI Insights', onClick: goToAIInsights, icon: <Megaphone className="w-4 h-4" /> },
+    { label: 'Satellite AI', onClick: goToSatelliteMapping, icon: <Satellite className="w-4 h-4" /> },
     { label: 'FRA Applications', onClick: goToFraApplications },
     { label: 'Complaints', onClick: goToComplaints },
     ...(userPermissions?.canManageAlerts ? [{ label: 'Alerts', onClick: goToAlerts }] : []),
