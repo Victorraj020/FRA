@@ -26,6 +26,7 @@ import Documentation from "./pages/Documentation";
 import Security from "./pages/Security";
 import Status from "./pages/Status";
 import ChatWidget from "@/components/ChatWidget";
+import PWAInstallPrompt from "@/components/PWAInstallPrompt";
 import MoTAInfo from "./pages/MoTAInfo";
 import VillageDetails from "./pages/VillageDetails";
 import AmenitiesViewer from "./pages/AmenitiesViewer";
@@ -161,84 +162,85 @@ const AppContent = () => {
         <SecretShortcut />
         <div className="flex-1 pb-24">
           <Routes>
-          <Route path="/" element={<RoleBasedRouter />} />
-          <Route path="/limited" element={<LimitedLanding />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/role-selection" element={<RoleSelection />} />
-          <Route path="/signup" element={<SignUp />} />
-          {/* Wrapped with role-based protection. Only government role can access. */}
-          {/* <Route path="/government-dashboard" element={<GovernmentDashboard />} /> */}
-          <Route 
-            path="/government-dashboard" 
-            element={
-              <ProtectedRoute requiredRole="government">
-                <GovernmentDashboard />
-              </ProtectedRoute>
-            } 
-          />
-          <Route path="/local-dashboard" element={<LocalDashboard />} />
-          <Route 
-            path="/tribal-dashboard" 
-            element={
-              <ProtectedRoute requiredRole="ministry_tribal">
-                <TribalDashboard />
-              </ProtectedRoute>
-            } 
-          />
-          <Route 
-            path="/welfare-dashboard" 
-            element={
-              <ProtectedRoute requiredRole="welfare_dept">
-                <WelfareDashboard />
-              </ProtectedRoute>
-            } 
-          />
-          <Route 
-            path="/forest-revenue-dashboard" 
-            element={
-              <ProtectedRoute requiredRole="forest_revenue">
-                <ForestRevenueDashboard />
-              </ProtectedRoute>
-            } 
-          />
-          <Route 
-            path="/planning-development-dashboard" 
-            element={
-              <ProtectedRoute requiredRole="planning_develop">
-                <PlanningDevelopmentDashboard />
-              </ProtectedRoute>
-            } 
-          />
-          <Route 
-            path="/ngo-dashboard" 
-            element={
-              <ProtectedRoute requiredRole="ngo">
-                <NGODashboard />
-              </ProtectedRoute>
-            } 
-          />
-          
-          
-          <Route path="/docs" element={<Documentation />} />
-          <Route path="/security" element={<Security />} />
-          <Route path="/status" element={<Status />} />
-          <Route path="/satkosia" element={<SatkosiaDashboard />} />
-          <Route path="/mota-info" element={<MoTAInfo />} />
-          <Route path="/village/:code" element={<VillageDetails />} />
-          <Route path="/villages" element={<VillagesList />} />
-          <Route path="/amenities" element={<AmenitiesViewer />} />
-          {/* Legacy/alias routes mapping to tabbed dashboards */}
-          <Route path="/map" element={<LegacyMapRedirect />} />
-          <Route path="/analytics" element={<LegacyAnalyticsRedirect />} />
-          <Route path="/fra-applications" element={<LegacyFRAApplicationsRedirect />} />
-          <Route path="/complaints" element={<LegacyComplaintsRedirect />} />
-          <Route path="/alerts" element={<LegacyAlertsRedirect />} />
-          <Route path="/ai-insights" element={<LegacyAIInsightsRedirect />} />
-          {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-          <Route path="*" element={<NotFound />} />
+            <Route path="/" element={<RoleBasedRouter />} />
+            <Route path="/limited" element={<LimitedLanding />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/role-selection" element={<RoleSelection />} />
+            <Route path="/signup" element={<SignUp />} />
+            {/* Wrapped with role-based protection. Only government role can access. */}
+            {/* <Route path="/government-dashboard" element={<GovernmentDashboard />} /> */}
+            <Route
+              path="/government-dashboard"
+              element={
+                <ProtectedRoute requiredRole="government">
+                  <GovernmentDashboard />
+                </ProtectedRoute>
+              }
+            />
+            <Route path="/local-dashboard" element={<LocalDashboard />} />
+            <Route
+              path="/tribal-dashboard"
+              element={
+                <ProtectedRoute requiredRole="ministry_tribal">
+                  <TribalDashboard />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/welfare-dashboard"
+              element={
+                <ProtectedRoute requiredRole="welfare_dept">
+                  <WelfareDashboard />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/forest-revenue-dashboard"
+              element={
+                <ProtectedRoute requiredRole="forest_revenue">
+                  <ForestRevenueDashboard />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/planning-development-dashboard"
+              element={
+                <ProtectedRoute requiredRole="planning_develop">
+                  <PlanningDevelopmentDashboard />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/ngo-dashboard"
+              element={
+                <ProtectedRoute requiredRole="ngo">
+                  <NGODashboard />
+                </ProtectedRoute>
+              }
+            />
+
+
+            <Route path="/docs" element={<Documentation />} />
+            <Route path="/security" element={<Security />} />
+            <Route path="/status" element={<Status />} />
+            <Route path="/satkosia" element={<SatkosiaDashboard />} />
+            <Route path="/mota-info" element={<MoTAInfo />} />
+            <Route path="/village/:code" element={<VillageDetails />} />
+            <Route path="/villages" element={<VillagesList />} />
+            <Route path="/amenities" element={<AmenitiesViewer />} />
+            {/* Legacy/alias routes mapping to tabbed dashboards */}
+            <Route path="/map" element={<LegacyMapRedirect />} />
+            <Route path="/analytics" element={<LegacyAnalyticsRedirect />} />
+            <Route path="/fra-applications" element={<LegacyFRAApplicationsRedirect />} />
+            <Route path="/complaints" element={<LegacyComplaintsRedirect />} />
+            <Route path="/alerts" element={<LegacyAlertsRedirect />} />
+            <Route path="/ai-insights" element={<LegacyAIInsightsRedirect />} />
+            {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+            <Route path="*" element={<NotFound />} />
           </Routes>
         </div>
         <ChatWidget autoOpenDelayMs={10000} />
+        <PWAInstallPrompt />
       </div>
     </GovLayout>
   );
